@@ -5,9 +5,10 @@ using UnityEngine;
 public class CarMove : MonoBehaviour
 {
     const float ACCELERATION = 0.001f;
-    const float DECELERATION = -0.0008f;
+    const float DECELERATION = -0.0025f;
     const float MAX_SPEED = 0.5f;
-    const float MAX_BACK_SPEED = -0.4f;
+    const float MAX_BACK_SPEED = -1.25f;
+    const float ROT_SPEED = 1.0f;
 
     Rigidbody rb;
     float speed;
@@ -36,7 +37,7 @@ public class CarMove : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.DownArrow) && backSpeed < MAX_BACK_SPEED) {
+        if (Input.GetKey(KeyCode.Space) && backSpeed < MAX_BACK_SPEED) {
             backSpeed += DECELERATION;
         }
         else {
@@ -48,8 +49,21 @@ public class CarMove : MonoBehaviour
             }
         }
 
+        if (Input.GetKey(KeyCode.RightArrow)) {
+            Quaternion turnRotation = Quaternion.Euler(0f, 0f, ROT_SPEED);
+            rb.MoveRotation(rb.rotation * turnRotation);
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow)) {
+            Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
+            rb.MoveRotation(rb.rotation * turnRotation);
+        }
+
         move = transform.up * (speed + backSpeed);
 
         rb.MovePosition(rb.position + move);
     }
 }
+
+//メモ
+//次回やること：スタートのプログラムを作る＆信号を加える　など　テキスト参考に

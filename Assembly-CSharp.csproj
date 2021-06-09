@@ -62,7 +62,7 @@
      <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
-     <Compile Include="Assets\Stage\CarMoveTest.cs" />
+     <Compile Include="Assets\StageFile\CarMoveTest.cs" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/83macbook/Documents/Car Racing/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
