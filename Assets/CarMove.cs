@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CarMove : MonoBehaviour
 {
@@ -25,45 +26,65 @@ public class CarMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow) && speed < MAX_SPEED) {
-            speed += ACCELERATION;
-        }
-        else {
-            if (speed > 0 ) {
-                speed += DECELERATION;
+        StartCoroutine(WaitSignal(4, () =>
+        {
+            if (Input.GetKey(KeyCode.UpArrow) && speed < MAX_SPEED) 
+            {
+                speed += ACCELERATION;
             }
-            else {
+            else 
+            {
+                if (speed > 0 ) 
+                {
+                    speed += DECELERATION;
+                }
+                else 
+                {
                 speed = 0;
+                }
             }
-        }
 
-        if (Input.GetKey(KeyCode.Space) && backSpeed < MAX_BACK_SPEED) {
-            backSpeed += DECELERATION;
-        }
-        else {
-            if (backSpeed < 0 ) {
-                backSpeed += ACCELERATION;
+            if (Input.GetKey(KeyCode.Space) && backSpeed < MAX_BACK_SPEED) 
+            {
+                backSpeed += DECELERATION;
             }
-            else {
+            else 
+            {
+                if (backSpeed < 0 ) 
+                {
+                    backSpeed += ACCELERATION;
+                }
+                else 
+                {
                 backSpeed = 0;
+                }
             }
-        }
 
-        if (Input.GetKey(KeyCode.RightArrow)) {
-            Quaternion turnRotation = Quaternion.Euler(0f, 0f, ROT_SPEED);
-            rb.MoveRotation(rb.rotation * turnRotation);
-        }
+            if (Input.GetKey(KeyCode.RightArrow)) 
+            {
+                Quaternion turnRotation = Quaternion.Euler(0f, 0f, ROT_SPEED);
+                rb.MoveRotation(rb.rotation * turnRotation);
+            }
 
-        if (Input.GetKey(KeyCode.LeftArrow)) {
-            Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
-            rb.MoveRotation(rb.rotation * turnRotation);
-        }
+            if (Input.GetKey(KeyCode.LeftArrow)) 
+            {
+                Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
+                rb.MoveRotation(rb.rotation * turnRotation);
+            }  
 
-        move = transform.up * (speed + backSpeed);
+            move = transform.up * (speed + backSpeed);
 
-        rb.MovePosition(rb.position + move);
+            rb.MovePosition(rb.position + move);
+
+        }));
+    }
+
+    private IEnumerator WaitSignal(float waitTime, Action action) 
+    {
+        yield return new WaitForSeconds(waitTime);
+        action();
     }
 }
 
 //メモ
-//次回やること：スタートのプログラムを作る＆信号を加える　など　テキスト参考に
+//次回やること：バックのプログラミングを作るorテキストの続きをやる

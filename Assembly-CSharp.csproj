@@ -62,6 +62,13 @@
      <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
+     <Compile Include="Assets\Signal_1_Back_Move.cs" />
+     <Compile Include="Assets\Signal_1_Move.cs" />
+     <Compile Include="Assets\Signal_2_Back_Move.cs" />
+     <Compile Include="Assets\Signal_2_Move.cs" />
+     <Compile Include="Assets\Signal_3_Back_Move.cs" />
+     <Compile Include="Assets\Signal_3_Move.cs" />
+     <Compile Include="Assets\Signal_Brack_Move.cs" />
      <Compile Include="Assets\StageFile\CarMoveTest.cs" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
