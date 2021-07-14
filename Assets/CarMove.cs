@@ -5,11 +5,13 @@ using System;
 
 public class CarMove : MonoBehaviour
 {
-    const float ACCELERATION = 0.001f;
-    const float DECELERATION = -0.0025f;
-    const float MAX_SPEED = 0.5f;
-    const float MAX_BACK_SPEED = -1.25f;
+    const float ACCELERATION = 0.0005f;
+    const float DECELERATION = -0.00125f;
+    const float MAX_SPEED = 0.25f;
+    const float MAX_BACK_SPEED = -1.0f;
     const float ROT_SPEED = 1.0f;
+
+    int CheckPointNumber;
 
     Rigidbody rb;
     float speed;
@@ -79,6 +81,14 @@ public class CarMove : MonoBehaviour
         }));
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "CheckPoint")
+        {
+            CheckPointNumber = 1;
+        }
+    }
+
     private IEnumerator WaitSignal(float waitTime, Action action) 
     {
         yield return new WaitForSeconds(waitTime);
@@ -87,6 +97,9 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：半透明のやつの「車に触れたら透明度を変える」スクリプトと、チェックポイントの仕組みを作る
+//次回やること：・半透明のやつの「車に触れたら透明度を変える」スクリプトと、チェックポイントの仕組みを作る
+//　　　　　　　・チェックポイントの区別は高さを使う
 //　  参考URL：https://kuroko-labo.com/オブジェクトをスクリプトで半透明にする/
 //　　　　　　　バックのプログラミングを作るorテキストの続きをやる
+
+// チェックポイント　→　ゴール　→　時間・その他モブやアイテム　→　最終的な目標はオンラインで対戦など
