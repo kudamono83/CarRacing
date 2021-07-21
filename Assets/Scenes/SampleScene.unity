@@ -419,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 756fbf499a3cb4e059271502c1a465dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 97.21
+      value: 97.2
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 756fbf499a3cb4e059271502c1a465dd, type: 3}
       propertyPath: m_LocalRotation.x
@@ -517,6 +517,7 @@ GameObject:
   - component: {fileID: 715571275}
   - component: {fileID: 715571274}
   - component: {fileID: 715571273}
+  - component: {fileID: 715571277}
   m_Layer: 0
   m_Name: CheckPointPass3
   m_TagString: CheckPoint
@@ -596,6 +597,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715571277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715571272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2cff4b2079154c2695bf30cd57e722a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carMove: {fileID: 0}
 --- !u!1 &805432098 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: 756fbf499a3cb4e059271502c1a465dd,
@@ -670,6 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19332f429f911481a96918976c48111d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CheckPointNumber: 0
 --- !u!1 &897676387 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: 756fbf499a3cb4e059271502c1a465dd,
@@ -720,6 +735,7 @@ GameObject:
   - component: {fileID: 944494706}
   - component: {fileID: 944494705}
   - component: {fileID: 944494704}
+  - component: {fileID: 944494708}
   m_Layer: 0
   m_Name: CheckPointPass1
   m_TagString: CheckPoint
@@ -799,6 +815,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &944494708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944494703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e25cb5e957b4bc183dabab28eb1173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carMove: {fileID: 0}
 --- !u!1 &1149279564 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: dbf1e95b0e1df43819faa095a1cb8864,
@@ -1332,6 +1361,7 @@ GameObject:
   - component: {fileID: 1927283344}
   - component: {fileID: 1927283343}
   - component: {fileID: 1927283342}
+  - component: {fileID: 1927283346}
   m_Layer: 0
   m_Name: CheckPointPass2
   m_TagString: CheckPoint
@@ -1411,6 +1441,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1927283346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927283341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71923a14270254de180e39c53b47db2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carMove: {fileID: 0}
 --- !u!1 &2126833724 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 756fbf499a3cb4e059271502c1a465dd,

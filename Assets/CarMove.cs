@@ -11,18 +11,29 @@ public class CarMove : MonoBehaviour
     const float MAX_BACK_SPEED = -1.0f;
     const float ROT_SPEED = 1.0f;
 
-    int CheckPointNumber;
+    public int CheckPointNumber;
 
     Rigidbody rb;
     float speed;
     float backSpeed;
     Vector3 move;
+
+    Vector3 tmp;
+    float y;
+
+
     // Start is called before the first frame update
     void Start()
     {
         speed = 0;
         move = Vector3.zero;
         rb = GetComponent<Rigidbody>();
+
+        CheckPointNumber = 0;
+
+        tmp = gameObject.GetComponent<Transform>().position;
+        y = tmp.y;
+
     }
 
     // Update is called once per frame
@@ -83,9 +94,19 @@ public class CarMove : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "CheckPoint")
+        if ((collision.gameObject.name == "CheckPoint") && (y <= 25))
         {
             CheckPointNumber = 1;
+
+            if ((collision.gameObject.name == "CheckPoint") && (y >= 26) && (y <= 31.4))
+            {
+                CheckPointNumber = 2;
+
+                if ((collision.gameObject.name == "CheckPoint") && (y >= 31.5))
+                {
+                    CheckPointNumber = 3;
+                }
+            }
         }
     }
 
@@ -97,9 +118,9 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：・半透明のやつの「車に触れたら透明度を変える」スクリプトと、チェックポイントの仕組みを作る
-//　　　　　　　・チェックポイントの区別は高さを使う
+//次回やること：・半透明のやつの「車に触れたら透明度を変える」スクリプトを作る
+//その先　　　：・バックのプログラミングを作る or テキストの続きをやる
 //　  参考URL：https://kuroko-labo.com/オブジェクトをスクリプトで半透明にする/
-//　　　　　　　バックのプログラミングを作るorテキストの続きをやる
+//　　　　　　：https://toburau.hatenablog.jp/entry/20170731/1501518531
 
 // チェックポイント　→　ゴール　→　時間・その他モブやアイテム　→　最終的な目標はオンラインで対戦など
