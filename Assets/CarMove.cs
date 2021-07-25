@@ -11,7 +11,12 @@ public class CarMove : MonoBehaviour
     const float MAX_BACK_SPEED = -1.0f;
     const float ROT_SPEED = 1.0f;
 
-    public int CheckPointNumber;
+    int CheckPointNumber;
+    //public int CheckPointNumberPublic
+    //{
+    //    get{ return this.CheckPointNumber; }
+    //    private set{ this.CheckPointNumber = value; }
+    //}
 
     Rigidbody rb;
     float speed;
@@ -33,6 +38,10 @@ public class CarMove : MonoBehaviour
 
         tmp = gameObject.GetComponent<Transform>().position;
         y = tmp.y;
+
+        transform.position = new Vector3(14,1,97);
+        transform.Rotate(0,0,0);
+
 
     }
 
@@ -92,17 +101,23 @@ public class CarMove : MonoBehaviour
         }));
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if ((collision.gameObject.name == "CheckPoint") && (y <= 25))
+        if (other.CompareTag("CheckPoint") && (y <= 25))
         {
             CheckPointNumber = 1;
 
-            if ((collision.gameObject.name == "CheckPoint") && (y >= 26) && (y <= 31.4))
+            if (Input.GetKey(KeyCode.R))
+            {
+                transform.position = new Vector3(-95,21,-86);
+                transform.Rotate(0,180,0);
+            }
+
+            if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
             {
                 CheckPointNumber = 2;
 
-                if ((collision.gameObject.name == "CheckPoint") && (y >= 31.5))
+                if (other.CompareTag("CheckPoint") && (y >= 31.5))
                 {
                     CheckPointNumber = 3;
                 }
@@ -118,9 +133,14 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：・半透明のやつの「車に触れたら透明度を変える」スクリプトを作る
-//その先　　　：・バックのプログラミングを作る or テキストの続きをやる
-//　  参考URL：https://kuroko-labo.com/オブジェクトをスクリプトで半透明にする/
+//次回やること：・半透明のやつの「車に触れたら透明度を変える」スクリプトを作る、チェックポイントの座標指定
+//　　　　　　：・具体的に次やることをいうと、「Rを押したか、yが-10以下になったら、さらにもしチェックポイントナンバー=?ならどこにリスポーンする」をvoid Updateの中にいれる！座標をどうするかを下の仮記録に記入が先。
+//その先　　　：・バックのプログラミングを作る or テキストの続きをやる or 時間計測
+//透明の参考URL：https://kuroko-labo.com/オブジェクトをスクリプトで半透明にする/
 //　　　　　　：https://toburau.hatenablog.jp/entry/20170731/1501518531
 
 // チェックポイント　→　ゴール　→　時間・その他モブやアイテム　→　最終的な目標はオンラインで対戦など
+
+//仮記録　1 -95,-86 180度回転
+//　　　　2 
+//　　　　3 
