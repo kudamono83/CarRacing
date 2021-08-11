@@ -12,6 +12,8 @@ public class CarMove : MonoBehaviour
     const float ROT_SPEED = 1.0f;
 
     int CheckPointNumber;
+
+    int Stop;
     //public int CheckPointNumberPublic
     //{
     //    get{ return this.CheckPointNumber; }
@@ -24,7 +26,7 @@ public class CarMove : MonoBehaviour
     Vector3 move;
 
     Vector3 tmp;
-    float y;
+    double y;
 
 
     // Start is called before the first frame update
@@ -36,18 +38,42 @@ public class CarMove : MonoBehaviour
 
         CheckPointNumber = 0;
 
-        tmp = gameObject.GetComponent<Transform>().position;
-        y = tmp.y;
+        //tmp = gameObject.GetComponent<Transform>().position;
+        //y = tmp.y;
 
         transform.position = new Vector3(14,1,97);
-        transform.Rotate(0,0,0);
-
+        
+        Stop = 0;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        Transform myTransform = this.transform;
+        Vector3 worldAngle = myTransform.eulerAngles;
+        float world_angle_x = worldAngle.x;
+        float world_angle_y = worldAngle.y;
+        float world_angle_z = worldAngle.z;
+        //worldAngle.x = -90.0f; 
+        //worldAngle.y = 0.0f;
+        //worldAngle.z = -1.0f;
+        //myTransform.eulerAngles = worldAngle;
+
+        //チートコマンド、CP1の前にワープ
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position = new Vector3(-95,21,-95);
+            worldAngle.x = -90.0f; 
+            worldAngle.y = 0.0f;
+            worldAngle.z = -181.0f;
+            myTransform.eulerAngles = worldAngle;
+        }
+
+
+        tmp = gameObject.GetComponent<Transform>().position;
+        y = tmp.y;
+
         StartCoroutine(WaitSignal(4, () =>
         {
             if (Input.GetKey(KeyCode.UpArrow) && speed < MAX_SPEED) 
@@ -99,6 +125,56 @@ public class CarMove : MonoBehaviour
             rb.MovePosition(rb.position + move);
 
         }));
+
+        if ((Input.GetKey(KeyCode.R)) || (y <= -10))
+        {
+            Stop = 1;
+
+            if (CheckPointNumber == 0)
+            {
+                transform.position = new Vector3(14,1,97);
+                worldAngle.x = -90.0f; 
+                worldAngle.y = 0.0f;
+                worldAngle.z = -1.0f;
+                myTransform.eulerAngles = worldAngle;
+            }
+
+            if (CheckPointNumber == 1)
+            {
+                transform.position = new Vector3(-95,21,-86);
+                worldAngle.x = -90.0f; 
+                worldAngle.y = 0.0f;
+                worldAngle.z = -181.0f;
+                myTransform.eulerAngles = worldAngle;
+            }
+
+            if (CheckPointNumber == 2)
+            {
+                transform.position = new Vector3(-81,31,95);
+                worldAngle.x = -90.0f; 
+                worldAngle.y = 0.0f;
+                worldAngle.z = -91.0f;
+                myTransform.eulerAngles = worldAngle;
+            }
+
+            if (CheckPointNumber == 3)
+            {
+                transform.position = new Vector3(95,32,24);
+                worldAngle.x = -90.0f; 
+                worldAngle.y = 0.0f;
+                worldAngle.z = -1.0f;
+                myTransform.eulerAngles = worldAngle;
+            }
+        }
+
+        if (Stop == 1)
+        {
+            speed = 0.0f;
+
+            Stop = 0;
+        }
+
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -107,21 +183,21 @@ public class CarMove : MonoBehaviour
         {
             CheckPointNumber = 1;
 
-            if (Input.GetKey(KeyCode.R))
-            {
-                transform.position = new Vector3(-95,21,-86);
-                transform.Rotate(0,180,0);
-            }
+            //if (Input.GetKey(KeyCode.R))
+            //{
+                //transform.position = new Vector3(-95,21,-86);
+                //transform.Rotate(0,180,0);
+            //}
+        }
 
-            if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
-            {
-                CheckPointNumber = 2;
+        if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
+        {
+            CheckPointNumber = 2;
+        }
 
-                if (other.CompareTag("CheckPoint") && (y >= 31.5))
-                {
-                    CheckPointNumber = 3;
-                }
-            }
+        if (other.CompareTag("CheckPoint") && (y >= 31.5))
+        {
+            CheckPointNumber = 3;
         }
     }
 
@@ -133,14 +209,15 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：・半透明のやつの「車に触れたら透明度を変える」スクリプトを作る、チェックポイントの座標指定
-//　　　　　　：・具体的に次やることをいうと、「Rを押したか、yが-10以下になったら、さらにもしチェックポイントナンバー=?ならどこにリスポーンする」をvoid Updateの中にいれる！座標をどうするかを下の仮記録に記入が先。
-//その先　　　：・バックのプログラミングを作る or テキストの続きをやる or 時間計測
-//透明の参考URL：https://kuroko-labo.com/オブジェクトをスクリプトで半透明にする/
-//　　　　　　：https://toburau.hatenablog.jp/entry/20170731/1501518531
+//次回やること：・時間計測プログラム
+//その先　　　：・バックのプログラミングを作る or テキストの続きをやる
+//参考URL 　 ：なし
 
 // チェックポイント　→　ゴール　→　時間・その他モブやアイテム　→　最終的な目標はオンラインで対戦など
 
-//仮記録　1 -95,-86 180度回転
-//　　　　2 
-//　　　　3 
+
+
+
+//CP場所記録　CP1 -95, 21,-86 180度回転
+//　　　  　　CP2 -81, 31, 95 初期向きから左に90度回転
+//　　  　　　CP3  95, 32, 24 0度
