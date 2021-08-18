@@ -73,6 +73,7 @@
      <Compile Include="Assets\Signal_3_Move.cs" />
      <Compile Include="Assets\Signal_Brack_Move.cs" />
      <Compile Include="Assets\StageFile\CarMoveTest.cs" />
+     <Compile Include="Assets\TimeCountManager.cs" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/83macbook/Documents/Car Racing/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
