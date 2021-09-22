@@ -12,8 +12,12 @@ public class CarMove : MonoBehaviour
     const float ROT_SPEED = 1.0f;
 
     int CheckPointNumber;
+    int OldCheckPointNumber;
+    int TextOnOff;
 
     int Stop;
+
+    //public Text ReverseRunText;
     //public int CheckPointNumberPublic
     //{
     //    get{ return this.CheckPointNumber; }
@@ -37,6 +41,8 @@ public class CarMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         CheckPointNumber = 0;
+        OldCheckPointNumber = -1;
+        //TextOnOff = 0;
 
         //tmp = gameObject.GetComponent<Transform>().position;
         //y = tmp.y;
@@ -60,8 +66,8 @@ public class CarMove : MonoBehaviour
         //worldAngle.z = -1.0f;
         //myTransform.eulerAngles = worldAngle;
 
-        //チートコマンド、CP1の前にワープ
-        if (Input.GetKey(KeyCode.A))
+        //チートコマンド、CPのあたりにワープ
+        if (Input.GetKey(KeyCode.Z))
         {
             transform.position = new Vector3(-95,21,-95);
             worldAngle.x = -90.0f; 
@@ -70,9 +76,38 @@ public class CarMove : MonoBehaviour
             myTransform.eulerAngles = worldAngle;
         }
 
+        if (Input.GetKey(KeyCode.X))
+        {
+            transform.position = new Vector3(-90,31,95);
+            worldAngle.x = -90.0f; 
+            worldAngle.y = 0.0f;
+            worldAngle.z = -91.0f;
+            myTransform.eulerAngles = worldAngle;
+        }
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            transform.position = new Vector3(95,32,30);
+            worldAngle.x = -90.0f; 
+            worldAngle.y = 0.0f;
+            worldAngle.z = -1.0f;
+            myTransform.eulerAngles = worldAngle;
+        }
+
 
         tmp = gameObject.GetComponent<Transform>().position;
         y = tmp.y;
+
+        //if (TextOnOff == 0)
+        //{
+            //ReverseRunText.text.SetActive(false);
+        //}
+
+        //if (TextOnOff == 1)
+        //{
+            //ReverseRunText.text.SetActive(true);
+        //}
+
 
         StartCoroutine(WaitSignal(4, () =>
         {
@@ -180,24 +215,140 @@ public class CarMove : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CheckPoint") && (y <= 25))
-        {
-            CheckPointNumber = 1;
+            {
+                if (OldCheckPointNumber == -1)
+                {
+                    CheckPointNumber = 1;
+                    //TextOnOff = 0;
+                    //OldCheckPointNumber = 0;
+                }
+                //else
+                //{
+                     //Debug.Log("逆走しているよ！");
+                     //transform.position = new Vector3(0,-10,0);
+                //}
+
+                
 
             //if (Input.GetKey(KeyCode.R))
             //{
                 //transform.position = new Vector3(-95,21,-86);
                 //transform.Rotate(0,180,0);
             //}
+            }
+
+        if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
+            {
+                if (OldCheckPointNumber == 0)
+                {
+                    CheckPointNumber = 2;
+                    //TextOnOff = 0;
+                    //OldCheckPointNumber = 1;
+                }
+                //else
+                //{
+                    //Debug.Log("逆走しているよ！");
+                    //transform.position = new Vector3(0,-10,0);
+                //}
+            }
+
+        if (other.CompareTag("CheckPoint") && (y >= 31.5))
+            {
+                if (OldCheckPointNumber == 1)
+                {
+                    CheckPointNumber = 3;
+                    //TextOnOff = 0;
+                    //OldCheckPointNumber = 2;
+                }
+                //else
+                //{
+                    //Debug.Log("逆走しているよ！");
+                    //transform.position = new Vector3(0,-10,0);
+                //}
+            }
+
+
+        //
+
+        //if (CheckPointNumber == 0)
+        //{
+            //if (other.CompareTag("CheckPoint") && (y <= 25))
+            //{
+                //CheckPointNumber = 1;
+
+            //if (Input.GetKey(KeyCode.R))
+            //{
+                //transform.position = new Vector3(-95,21,-86);
+                //transform.Rotate(0,180,0);
+            //}
+            //}
+        //}
+
+        //if (CheckPointNumber == 1)
+        //{
+            //if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
+            //{
+                //CheckPointNumber = 2;
+            //}
+        //}
+
+        //if (CheckPointNumber == 2)
+        //{
+            //if (other.CompareTag("CheckPoint") && (y >= 31.5))
+            //{
+                //CheckPointNumber = 3;
+            //}
+        //}
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CheckPoint") && (y <= 25))
+        {
+            if (CheckPointNumber == 1)
+            {
+                //CheckPointNumber = 1;
+                OldCheckPointNumber = 0;
+                //TextOnOff = 0;
+            }
+            else
+            {
+                Debug.Log("逆走しているよ！");
+                //TextOnOff = 1;
+                //transform.position = new Vector3(0,-10,0);
+            }
         }
 
         if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
         {
-            CheckPointNumber = 2;
+            if (CheckPointNumber == 2)
+            {
+                //CheckPointNumber = 2;
+                OldCheckPointNumber = 1;
+                //TextOnOff = 0;
+            }
+            else
+            {
+                Debug.Log("逆走しているよ！");
+                //TextOnOff = 1;
+                //transform.position = new Vector3(0,-10,0);
+            }
         }
 
         if (other.CompareTag("CheckPoint") && (y >= 31.5))
         {
-            CheckPointNumber = 3;
+            if (CheckPointNumber == 3)
+            {
+                //CheckPointNumber = 3;
+                OldCheckPointNumber = 2;
+                //TextOnOff = 0;
+            }
+            else
+            {
+                Debug.Log("逆走しているよ！");
+                //TextOnOff = 1;
+                //transform.position = new Vector3(0,-10,0);
+            }
         }
     }
 
@@ -209,12 +360,9 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：・時間表示において、大画面にするとテキストが見えなくなるのを直す
-//その先　　　：・バックのプログラミングを作る or テキストの続きをやる
+//次回やること：・逆走テキストの表示非表示切り替えをする
+//その先　　　：・ゴール　・バック　・時速表示、曲がるときに減速　・カメラ視点変更　・モブ、アイテム　・最終的にはオンライン、対戦など
 //参考URL 　 ：なし
-
-// チェックポイント　→　ゴール　→　時間・その他モブやアイテム　→　最終的な目標はオンラインで対戦など
-
 
 
 //CP場所記録　CP1 -95, 21,-86 180度回転
