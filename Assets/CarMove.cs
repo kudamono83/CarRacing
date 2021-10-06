@@ -12,10 +12,13 @@ public class CarMove : MonoBehaviour
     const float ROT_SPEED = 1.0f;
 
     int CheckPointNumber;
-    int OldCheckPointNumber;
+    //int OldCheckPointNumber;
     int TextOnOff;
 
     int Stop;
+
+    [SerializeField]
+    GameObject Text;
 
     //public Text ReverseRunText;
     //public int CheckPointNumberPublic
@@ -41,13 +44,14 @@ public class CarMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         CheckPointNumber = 0;
-        OldCheckPointNumber = -1;
-        //TextOnOff = 0;
+        //Text.SetActive(false);
+        //OldCheckPointNumber = -1;
+        TextOnOff = 0;
 
         //tmp = gameObject.GetComponent<Transform>().position;
         //y = tmp.y;
 
-        transform.position = new Vector3(14,1,97);
+        transform.position = new Vector3(15,1,97);
         
         Stop = 0;
 
@@ -167,7 +171,7 @@ public class CarMove : MonoBehaviour
 
             if (CheckPointNumber == 0)
             {
-                transform.position = new Vector3(14,1,97);
+                transform.position = new Vector3(15,1,97);
                 worldAngle.x = -90.0f; 
                 worldAngle.y = 0.0f;
                 worldAngle.z = -1.0f;
@@ -209,6 +213,20 @@ public class CarMove : MonoBehaviour
             Stop = 0;
         }
 
+        if (TextOnOff == 0)
+        {
+            Text.SetActive(false);
+        }
+        if (TextOnOff == 1)
+        {
+            Text.SetActive(true);
+
+            if (Input.GetKey(KeyCode.R))
+            {
+                TextOnOff = 0;
+            }
+        }
+
 
     }
 
@@ -216,17 +234,29 @@ public class CarMove : MonoBehaviour
     {
         if (other.CompareTag("CheckPoint") && (y <= 25))
             {
-                if (OldCheckPointNumber == -1)
+
+                if (CheckPointNumber <= 1)
+                //if (OldCheckPointNumber == -1)
                 {
                     CheckPointNumber = 1;
                     //TextOnOff = 0;
                     //OldCheckPointNumber = 0;
                 }
-                //else
-                //{
+                else
+                {
+                    //if ((Input.GetKey(KeyCode.R)) || (other.CompareTag("CheckPoint") && (y >= 26)))
+                    //{
+                        //Text.SetActive(false);
+                    //}
+                    //else
+                    //{
+                        //Text.SetActive(true);
+                        TextOnOff = 1;
+                        
+                    //}
                      //Debug.Log("逆走しているよ！");
                      //transform.position = new Vector3(0,-10,0);
-                //}
+                }
 
                 
 
@@ -239,33 +269,65 @@ public class CarMove : MonoBehaviour
 
         if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
             {
-                if (OldCheckPointNumber == 0)
+                if (CheckPointNumber <= 2)
+                //if (OldCheckPointNumber == 0)
                 {
                     CheckPointNumber = 2;
                     //TextOnOff = 0;
                     //OldCheckPointNumber = 1;
                 }
-                //else
-                //{
+                else
+                {
+                    TextOnOff = 1;
+                    //if ((Input.GetKey(KeyCode.R)) || (other.CompareTag("CheckPoint") && (y >= 31.5)))
+                    //{
+                        //Text.SetActive(false);
+                    //}
+                    //else
+                    //{
+                        //Text.SetActive(true);
+                    //}
                     //Debug.Log("逆走しているよ！");
                     //transform.position = new Vector3(0,-10,0);
-                //}
+                }
             }
 
         if (other.CompareTag("CheckPoint") && (y >= 31.5))
             {
-                if (OldCheckPointNumber == 1)
-                {
+                //if (OldCheckPointNumber == 1)
+                //{
                     CheckPointNumber = 3;
                     //TextOnOff = 0;
                     //OldCheckPointNumber = 2;
-                }
+                //}
                 //else
                 //{
                     //Debug.Log("逆走しているよ！");
                     //transform.position = new Vector3(0,-10,0);
                 //}
             }
+        
+        if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
+        {
+            if (CheckPointNumber == 2)
+            {
+                if (TextOnOff == 1)
+                {
+                    TextOnOff = 0;
+                }
+            }
+        }
+
+        if (other.CompareTag("CheckPoint") && (y >= 31.5))
+        {
+            if (CheckPointNumber == 3)
+            {
+                if (TextOnOff == 1)
+                {
+                    TextOnOff = 0;
+                }
+            }
+        }
 
 
         //
@@ -301,56 +363,56 @@ public class CarMove : MonoBehaviour
         //}
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("CheckPoint") && (y <= 25))
-        {
-            if (CheckPointNumber == 1)
-            {
+    //void OnTriggerExit(Collider other)
+    //{
+        //if (other.CompareTag("CheckPoint") && (y <= 25))
+        //{
+            //if (CheckPointNumber == 1)
+            //{
                 //CheckPointNumber = 1;
-                OldCheckPointNumber = 0;
+                // OldCheckPointNumber = 0;
                 //TextOnOff = 0;
-            }
-            else
-            {
-                Debug.Log("逆走しているよ！");
+            //}
+            //else
+            //{
+                //Debug.Log("逆走しているよ！");
                 //TextOnOff = 1;
                 //transform.position = new Vector3(0,-10,0);
-            }
-        }
+            //}
+        //}
 
-        if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
-        {
-            if (CheckPointNumber == 2)
-            {
+        //if (other.CompareTag("CheckPoint") && (y >= 26) && (y <= 31.4))
+        //{
+            //if (CheckPointNumber == 2)
+            //{
                 //CheckPointNumber = 2;
-                OldCheckPointNumber = 1;
+                //OldCheckPointNumber = 1;
                 //TextOnOff = 0;
-            }
-            else
-            {
-                Debug.Log("逆走しているよ！");
+            //}
+            //else
+            //{
+                //Debug.Log("逆走しているよ！");
                 //TextOnOff = 1;
                 //transform.position = new Vector3(0,-10,0);
-            }
-        }
+            //}
+        //}
 
-        if (other.CompareTag("CheckPoint") && (y >= 31.5))
-        {
-            if (CheckPointNumber == 3)
-            {
+        //if (other.CompareTag("CheckPoint") && (y >= 31.5))
+        //{
+            //if (CheckPointNumber == 3)
+            //{
                 //CheckPointNumber = 3;
-                OldCheckPointNumber = 2;
+                //OldCheckPointNumber = 2;
                 //TextOnOff = 0;
-            }
-            else
-            {
-                Debug.Log("逆走しているよ！");
+            //}
+            //else
+            //{
+                //Debug.Log("逆走しているよ！");
                 //TextOnOff = 1;
                 //transform.position = new Vector3(0,-10,0);
-            }
-        }
-    }
+            //}
+        //}
+    //}
 
     private IEnumerator WaitSignal(float waitTime, Action action) 
     {
@@ -360,7 +422,7 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：・逆走テキストの表示非表示切り替えをする
+//次回やること：・ゴール作り
 //その先　　　：・ゴール　・バック　・時速表示、曲がるときに減速　・カメラ視点変更　・モブ、アイテム　・最終的にはオンライン、対戦など
 //参考URL 　 ：なし
 
