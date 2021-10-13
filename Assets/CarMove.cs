@@ -20,6 +20,9 @@ public class CarMove : MonoBehaviour
     [SerializeField]
     GameObject Text;
 
+    [SerializeField]
+    GameObject GoalText;
+
     //public Text ReverseRunText;
     //public int CheckPointNumberPublic
     //{
@@ -48,6 +51,8 @@ public class CarMove : MonoBehaviour
         //OldCheckPointNumber = -1;
         TextOnOff = 0;
 
+        GoalText.SetActive(false);
+
         //tmp = gameObject.GetComponent<Transform>().position;
         //y = tmp.y;
 
@@ -60,6 +65,8 @@ public class CarMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(CheckPointNumber);
+
         Transform myTransform = this.transform;
         Vector3 worldAngle = myTransform.eulerAngles;
         float world_angle_x = worldAngle.x;
@@ -95,6 +102,15 @@ public class CarMove : MonoBehaviour
             worldAngle.x = -90.0f; 
             worldAngle.y = 0.0f;
             worldAngle.z = -1.0f;
+            myTransform.eulerAngles = worldAngle;
+        }
+
+        if (Input.GetKey(KeyCode.V))
+        {
+            transform.position = new Vector3(-6,42,5);
+            worldAngle.x = -90.0f; 
+            worldAngle.y = 0.0f;
+            worldAngle.z = 89.0f;
             myTransform.eulerAngles = worldAngle;
         }
 
@@ -202,6 +218,15 @@ public class CarMove : MonoBehaviour
                 worldAngle.x = -90.0f; 
                 worldAngle.y = 0.0f;
                 worldAngle.z = -1.0f;
+                myTransform.eulerAngles = worldAngle;
+            }
+
+            if (CheckPointNumber == 4)
+            {
+                transform.position = new Vector3(-10,42,5);
+                worldAngle.x = -90.0f; 
+                worldAngle.y = 0.0f;
+                worldAngle.z = 89.0f;
                 myTransform.eulerAngles = worldAngle;
             }
         }
@@ -329,6 +354,12 @@ public class CarMove : MonoBehaviour
             }
         }
 
+        if (other.CompareTag("Finish"))
+        {
+            GoalText.SetActive(true);
+            CheckPointNumber = 4;
+        }
+
 
         //
 
@@ -422,8 +453,9 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：・ゴール作り
-//その先　　　：・ゴール　・バック　・時速表示、曲がるときに減速　・カメラ視点変更　・モブ、アイテム　・最終的にはオンライン、対戦など
+//次回やること：終盤のぐるぐるに標識設置　標識はunity下の方のファイルから、CSの中のPrefabsの中にたくさん入ってるのでそれを取り出す。支柱は外したまま使っちゃう。
+//　　　　　　：バックのプログラムを作る。
+//その先　　　：・バック　・時速表示、曲がるときに減速　・カメラ視点変更　・モブ、アイテム　・最終的にはオンライン、対戦など
 //参考URL 　 ：なし
 
 

@@ -57,6 +57,7 @@
      <Compile Include="Assets\CheckPoint1.cs" />
      <Compile Include="Assets\CheckPoint2.cs" />
      <Compile Include="Assets\CheckPoint3.cs" />
+     <Compile Include="Assets\GoalPass.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -74,6 +75,8 @@
      <Compile Include="Assets\Signal_Brack_Move.cs" />
      <Compile Include="Assets\StageFile\CarMoveTest.cs" />
      <Compile Include="Assets\TimeCountManager.cs" />
+     <None Include="Assets\CS - Signs Free\Readme.txt" />
+     <None Include="Assets\CS - Signs Free\Standard 2 Sided.shader" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/83macbook/Documents/Car Racing/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
