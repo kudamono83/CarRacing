@@ -66,6 +66,7 @@
      <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
+     <Compile Include="Assets\SensorScript.cs" />
      <Compile Include="Assets\Signal_1_Back_Move.cs" />
      <Compile Include="Assets\Signal_1_Move.cs" />
      <Compile Include="Assets\Signal_2_Back_Move.cs" />

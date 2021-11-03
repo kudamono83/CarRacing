@@ -5,8 +5,8 @@ using System;
 
 public class Signal_1_Move : MonoBehaviour
 {
-    [SerializeField]
-    GameObject StartText;
+    //[SerializeField]
+    public GameObject StartText;
     // Start is called before the first frame update
     void Start()
     {

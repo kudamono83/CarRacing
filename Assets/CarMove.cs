@@ -17,11 +17,11 @@ public class CarMove : MonoBehaviour
 
     int Stop;
 
-    [SerializeField]
-    GameObject Text;
+    //[SerializeField]
+    public GameObject Text;
 
-    [SerializeField]
-    GameObject GoalText;
+    //[SerializeField]
+    public GameObject GoalText;
 
     //public Text ReverseRunText;
     //public int CheckPointNumberPublic
@@ -108,6 +108,15 @@ public class CarMove : MonoBehaviour
         if (Input.GetKey(KeyCode.V))
         {
             transform.position = new Vector3(-6,42,5);
+            worldAngle.x = -90.0f; 
+            worldAngle.y = 0.0f;
+            worldAngle.z = 89.0f;
+            myTransform.eulerAngles = worldAngle;
+        }
+
+        if (Input.GetKey(KeyCode.B))
+        {
+            transform.position = new Vector3(6,43,-2);
             worldAngle.x = -90.0f; 
             worldAngle.y = 0.0f;
             worldAngle.z = 89.0f;
