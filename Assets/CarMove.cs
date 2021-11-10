@@ -7,8 +7,11 @@ public class CarMove : MonoBehaviour
 {
     const float ACCELERATION = 0.0005f;
     const float DECELERATION = -0.00125f;
+    const float BACKACCELERATION = 0.00025f;
+    const float BACKDECELERATION = -0.000625f;
     const float MAX_SPEED = 0.25f;
-    const float MAX_BACK_SPEED = -1.0f;
+    const float MAX_BREAK_SPEED = -1.0f;
+    const float MAX_BACK_SPEED = 0.125f;
     const float ROT_SPEED = 1.0f;
 
     int CheckPointNumber;
@@ -32,7 +35,10 @@ public class CarMove : MonoBehaviour
 
     Rigidbody rb;
     float speed;
+    float breakSpeed;
     float backSpeed;
+    //float bendSpeed;
+    //float reallybackSpeed;
     Vector3 move;
 
     Vector3 tmp;
@@ -43,6 +49,8 @@ public class CarMove : MonoBehaviour
     void Start()
     {
         speed = 0;
+        breakSpeed = 0;
+        backSpeed = 0;
         move = Vector3.zero;
         rb = GetComponent<Rigidbody>();
 
@@ -65,7 +73,7 @@ public class CarMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(CheckPointNumber);
+        Debug.Log(speed + breakSpeed + backSpeed);
 
         Transform myTransform = this.transform;
         Vector3 worldAngle = myTransform.eulerAngles;
@@ -152,23 +160,55 @@ public class CarMove : MonoBehaviour
                 }
                 else 
                 {
-                speed = 0;
+                    speed = 0;
                 }
             }
 
-            if (Input.GetKey(KeyCode.Space) && backSpeed < MAX_BACK_SPEED) 
+            if (Input.GetKey(KeyCode.DownArrow) && backSpeed < MAX_BACK_SPEED) 
             {
-                backSpeed += DECELERATION;
+                backSpeed -= BACKACCELERATION;
             }
             else 
             {
                 if (backSpeed < 0 ) 
                 {
-                    backSpeed += ACCELERATION;
+                    backSpeed -= BACKDECELERATION;
                 }
                 else 
                 {
-                backSpeed = 0;
+                    backSpeed = 0;
+                }
+            }
+
+            //if (Input.GetKey(KeyCode.DownArrow) && speed < MAX_BACK_SPEED) 
+            //{
+                //backSpeed += BACKACCELERATION;
+            //}
+            //else 
+            //{
+                //if (backSpeed < 0 ) 
+                //{
+                    //backSpeed += BACKDECELERATION;
+                //}
+                //else 
+                //{
+                //backSpeed = 0;
+                //}
+            //}
+
+            if (Input.GetKey(KeyCode.Space) && breakSpeed < MAX_BREAK_SPEED) 
+            {
+                breakSpeed += DECELERATION;
+            }
+            else 
+            {
+                if (breakSpeed < 0 ) 
+                {
+                    breakSpeed += ACCELERATION;
+                }
+                else 
+                {
+                    breakSpeed = 0;
                 }
             }
 
@@ -184,7 +224,9 @@ public class CarMove : MonoBehaviour
                 rb.MoveRotation(rb.rotation * turnRotation);
             }  
 
-            move = transform.up * (speed + backSpeed);
+            //reallybackSpeed = backSpeed / backSpeed * 2;
+
+            move = transform.up * (speed + breakSpeed + backSpeed);
 
             rb.MovePosition(rb.position + move);
 
@@ -193,6 +235,9 @@ public class CarMove : MonoBehaviour
         if ((Input.GetKey(KeyCode.R)) || (y <= -10))
         {
             Stop = 1;
+            speed = 0;
+            breakSpeed = 0;
+            backSpeed = 0;
 
             if (CheckPointNumber == 0)
             {
@@ -462,10 +507,12 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：標識設置作業続き
-//　　　　　　：バックのプログラムを作る。
-//その先　　　：・バック　・時速表示、曲がるときに減速　・カメラ視点変更　・モブ、アイテム　・最終的にはオンライン、対戦など
+//次回やること：時速表示
+//その先　　　：・カメラ視点変更　・モブ、アイテム　・最終的にはオンライン、対戦など
 //参考URL 　 ：なし
+
+//時速表示メモ：車の全長が6mmの時、コースの幅は77mm　現実はこの800倍、よって480cmの時、6160cmになる
+//　　　　　　：多分これ使わない
 
 
 //CP場所記録　CP1 -95, 21,-86 180度回転
