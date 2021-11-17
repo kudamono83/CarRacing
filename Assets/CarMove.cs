@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class CarMove : MonoBehaviour
 {
-    const float ACCELERATION = 0.0005f;
-    const float DECELERATION = -0.00125f;
-    const float BACKACCELERATION = 0.00025f;
-    const float BACKDECELERATION = -0.000625f;
+    const float ACCELERATION = 0.00025f;
+    const float DECELERATION = -0.001f;
+    const float BACKACCELERATION = 0.00015f;
+    const float BACKDECELERATION = -0.00075f;
     const float MAX_SPEED = 0.25f;
     const float MAX_BREAK_SPEED = -1.0f;
     const float MAX_BACK_SPEED = 0.125f;
@@ -26,6 +27,11 @@ public class CarMove : MonoBehaviour
     //[SerializeField]
     public GameObject GoalText;
 
+    public Text SpeedText;
+
+    //public Camera mainCamera;
+    //public Camera subCamera;
+
     //public Text ReverseRunText;
     //public int CheckPointNumberPublic
     //{
@@ -37,6 +43,7 @@ public class CarMove : MonoBehaviour
     float speed;
     float breakSpeed;
     float backSpeed;
+    //int kph;
     //float bendSpeed;
     //float reallybackSpeed;
     Vector3 move;
@@ -68,12 +75,20 @@ public class CarMove : MonoBehaviour
         
         Stop = 0;
 
+        //mainCamera = GameObject.Find("MainCamera");
+        //subCamera = GameObject.Find("SubCamera");
+
+        //subCamera.enabled(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(speed + breakSpeed + backSpeed);
+        //Debug.Log ();
+
+        int kph = Mathf.RoundToInt(500 * (speed + breakSpeed + backSpeed));
+        SpeedText.text = kph.ToString("000");
 
         Transform myTransform = this.transform;
         Vector3 worldAngle = myTransform.eulerAngles;
@@ -104,7 +119,7 @@ public class CarMove : MonoBehaviour
             myTransform.eulerAngles = worldAngle;
         }
 
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetKey(KeyCode.V))
         {
             transform.position = new Vector3(95,32,30);
             worldAngle.x = -90.0f; 
@@ -113,7 +128,7 @@ public class CarMove : MonoBehaviour
             myTransform.eulerAngles = worldAngle;
         }
 
-        if (Input.GetKey(KeyCode.V))
+        if (Input.GetKey(KeyCode.B))
         {
             transform.position = new Vector3(-6,42,5);
             worldAngle.x = -90.0f; 
@@ -122,7 +137,7 @@ public class CarMove : MonoBehaviour
             myTransform.eulerAngles = worldAngle;
         }
 
-        if (Input.GetKey(KeyCode.B))
+        if (Input.GetKey(KeyCode.N))
         {
             transform.position = new Vector3(6,43,-2);
             worldAngle.x = -90.0f; 
@@ -222,7 +237,24 @@ public class CarMove : MonoBehaviour
             {
                 Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
                 rb.MoveRotation(rb.rotation * turnRotation);
-            }  
+            }
+
+
+            //if(Input.GetKey(KeyCode.C))
+            //{
+                //if(mainCamera.enabled(true))
+                //{
+                    //mainCamera.enabled(false);
+                    //subCamera.enabled(true);
+                //}
+
+                //if(subCamera.enabled(true))
+                //{
+                    //mainCamera.enabled(true);
+                    //subCamera.enabled(false);
+                //}
+            //}
+
 
             //reallybackSpeed = backSpeed / backSpeed * 2;
 
@@ -509,7 +541,7 @@ public class CarMove : MonoBehaviour
 //メモ
 //次回やること：時速表示
 //その先　　　：・カメラ視点変更　・モブ、アイテム　・最終的にはオンライン、対戦など
-//参考URL 　 ：なし
+//参考URL 　 ：https://knb-mayumi.com/unity-camerachange/ でできるはず
 
 //時速表示メモ：車の全長が6mmの時、コースの幅は77mm　現実はこの800倍、よって480cmの時、6160cmになる
 //　　　　　　：多分これ使わない
