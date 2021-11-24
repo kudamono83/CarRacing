@@ -6,11 +6,13 @@ using System;
 
 public class CarMove : MonoBehaviour
 {
-    const float ACCELERATION = 0.00025f;
+    const float ACCELERATION = 0.00075f;
     const float DECELERATION = -0.001f;
-    const float BACKACCELERATION = 0.00015f;
-    const float BACKDECELERATION = -0.00075f;
-    const float MAX_SPEED = 0.25f;
+    const float DECELERATION2 = -0.0005f;
+    const float BACKACCELERATION = 0.0002f;
+    const float BACKDECELERATION = -0.001f;
+    const float BACKDECELERATION2 = -0.0003f;
+    const float MAX_SPEED = 0.5f;
     const float MAX_BREAK_SPEED = -1.0f;
     const float MAX_BACK_SPEED = 0.125f;
     const float ROT_SPEED = 1.0f;
@@ -28,6 +30,11 @@ public class CarMove : MonoBehaviour
     public GameObject GoalText;
 
     public Text SpeedText;
+
+    public GameObject MainCamera;
+    public GameObject Camera2;
+    public GameObject Camera3;
+    public GameObject Camera4;
 
     //public Camera mainCamera;
     //public Camera subCamera;
@@ -75,6 +82,16 @@ public class CarMove : MonoBehaviour
         
         Stop = 0;
 
+        //MainCamera = GameObject.Find("MainCamera");
+        //Camera2 = GameObject.Find("Camera2");
+        //Camera3 = GameObject.Find("Camera3");
+        //Camera4 = GameObject.Find("Camera4");
+
+        Camera2.SetActive(false);
+        Camera3.SetActive(false);
+        Camera4.SetActive(false);
+        MainCamera.SetActive(true);
+
         //mainCamera = GameObject.Find("MainCamera");
         //subCamera = GameObject.Find("SubCamera");
 
@@ -87,7 +104,7 @@ public class CarMove : MonoBehaviour
     {
         //Debug.Log ();
 
-        int kph = Mathf.RoundToInt(500 * (speed + breakSpeed + backSpeed));
+        int kph = Mathf.RoundToInt(300 * (speed + backSpeed));
         SpeedText.text = kph.ToString("000");
 
         Transform myTransform = this.transform;
@@ -171,7 +188,7 @@ public class CarMove : MonoBehaviour
             {
                 if (speed > 0 ) 
                 {
-                    speed += DECELERATION;
+                    speed += DECELERATION2;
                 }
                 else 
                 {
@@ -187,7 +204,7 @@ public class CarMove : MonoBehaviour
             {
                 if (backSpeed < 0 ) 
                 {
-                    backSpeed -= BACKDECELERATION;
+                    backSpeed -= BACKDECELERATION2;
                 }
                 else 
                 {
@@ -211,21 +228,31 @@ public class CarMove : MonoBehaviour
                 //}
             //}
 
-            if (Input.GetKey(KeyCode.Space) && breakSpeed < MAX_BREAK_SPEED) 
+            if (Input.GetKey(KeyCode.Space) && breakSpeed > MAX_BREAK_SPEED) 
             {
-                breakSpeed += DECELERATION;
-            }
-            else 
-            {
-                if (breakSpeed < 0 ) 
+                if (speed > 0)
                 {
-                    breakSpeed += ACCELERATION;
+                    speed += DECELERATION;
                 }
-                else 
+
+                if (backSpeed < 0)
                 {
-                    breakSpeed = 0;
+                    backSpeed -= BACKDECELERATION;
                 }
             }
+            //else 
+            //{
+                
+                //if (breakSpeed < 0 ) 
+                //{
+                    //breakSpeed += ACCELERATION;
+                    //speed += DECELERATION2;
+                //}
+                //else 
+                //{
+                    //speed = 0;
+                //}
+            //}
 
             if (Input.GetKey(KeyCode.RightArrow)) 
             {
@@ -238,7 +265,6 @@ public class CarMove : MonoBehaviour
                 Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
                 rb.MoveRotation(rb.rotation * turnRotation);
             }
-
 
             //if(Input.GetKey(KeyCode.C))
             //{
@@ -255,10 +281,42 @@ public class CarMove : MonoBehaviour
                 //}
             //}
 
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                //Debug.Log("oseterune!");
+                Camera2.SetActive(false);
+                Camera3.SetActive(false);
+                Camera4.SetActive(false);
+                MainCamera.SetActive(true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Camera2.SetActive(true);
+                Camera3.SetActive(false);
+                Camera4.SetActive(false);
+                MainCamera.SetActive(false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Camera2.SetActive(false);
+                Camera3.SetActive(true);
+                Camera4.SetActive(false);
+                MainCamera.SetActive(false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                Camera2.SetActive(false);
+                Camera3.SetActive(false);
+                Camera4.SetActive(true);
+                MainCamera.SetActive(false);
+            }
 
             //reallybackSpeed = backSpeed / backSpeed * 2;
 
-            move = transform.up * (speed + breakSpeed + backSpeed);
+            move = transform.up * (speed + backSpeed);
 
             rb.MovePosition(rb.position + move);
 
@@ -539,12 +597,9 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：時速表示
-//その先　　　：・カメラ視点変更　・モブ、アイテム　・最終的にはオンライン、対戦など
-//参考URL 　 ：https://knb-mayumi.com/unity-camerachange/ でできるはず
-
-//時速表示メモ：車の全長が6mmの時、コースの幅は77mm　現実はこの800倍、よって480cmの時、6160cmになる
-//　　　　　　：多分これ使わない
+//次回やること：カメラを切り替えた時に、テキストが位置回転変更するスクリプトを作る
+//その先　　　：・モブ、アイテム　・最終的にはオンライン、対戦など
+//参考URL 　 ：参考になるかわからないけど、　　https://qiita.com/Maru60014236/items/0e3eb6c60307fa083117
 
 
 //CP場所記録　CP1 -95, 21,-86 180度回転
