@@ -11,6 +11,8 @@ public class TimeCountManager : MonoBehaviour
     public int minutes;
     public float seconds;
 
+    public GameObject GoalText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,14 @@ public class TimeCountManager : MonoBehaviour
     {
         StartCoroutine(WaitSignal(4, () =>
         {
-            timeCount += Time.deltaTime;
+            if(GoalText.activeSelf)
+            {
+                
+            }
+            else
+            {
+                timeCount += Time.deltaTime;
+            }
         }));
             minutes = (int)timeCount / 60;
             seconds = timeCount % 60.0f;

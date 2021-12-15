@@ -605,3 +605,8 @@ public class CarMove : MonoBehaviour
 //CP場所記録　CP1 -95, 21,-86 180度回転
 //　　　  　　CP2 -81, 31, 95 初期向きから左に90度回転
 //　　  　　　CP3  95, 32, 24 0度
+
+//テキスト位置　CAMERA1　
+//　　　　　　　CAMERA2　
+//　　　　　　　CAMERA3　
+//　　　　　　　CAMERA4　
