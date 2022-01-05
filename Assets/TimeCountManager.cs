@@ -8,6 +8,9 @@ public class TimeCountManager : MonoBehaviour
 {
     public float timeCount;
     public Text countDownText;
+    public Text countDownText2;
+    public Text countDownText3;
+    public Text countDownText4;
     public int minutes;
     public float seconds;
 
@@ -37,6 +40,9 @@ public class TimeCountManager : MonoBehaviour
             seconds = timeCount % 60.0f;
 
             countDownText.text = "Time　" + minutes.ToString("0") + " : " + seconds.ToString("00.0");
+            countDownText2.text = "Time　" + minutes.ToString("0") + " : " + seconds.ToString("00.0");
+            countDownText3.text = "Time　" + minutes.ToString("0") + " : " + seconds.ToString("00.0");
+            countDownText4.text = "Time　" + minutes.ToString("0") + " : " + seconds.ToString("00.0");
     }
     
     private IEnumerator WaitSignal(float waitTime, Action action) 

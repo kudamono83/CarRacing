@@ -25,12 +25,20 @@ public class CarMove : MonoBehaviour
 
     //[SerializeField]
     public GameObject Text;
+    public GameObject Text2;
+    public GameObject Text3;
+    public GameObject Text4;
 
     //[SerializeField]
     public GameObject GoalText;
+    public GameObject GoalText2;
+    public GameObject GoalText3;
+    public GameObject GoalText4;
 
     public Text SpeedText;
-
+    Canvas CameraCanvas;
+    public GameObject Canvas;
+    //public Camera MainCamera;
     public GameObject MainCamera;
     public GameObject Camera2;
     public GameObject Camera3;
@@ -74,6 +82,9 @@ public class CarMove : MonoBehaviour
         TextOnOff = 0;
 
         GoalText.SetActive(false);
+        GoalText2.SetActive(false);
+        GoalText3.SetActive(false);
+        GoalText4.SetActive(false);
 
         //tmp = gameObject.GetComponent<Transform>().position;
         //y = tmp.y;
@@ -283,7 +294,10 @@ public class CarMove : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                //Debug.Log("oseterune!");
+                //CameraCanvas = Canvas.GetComponent<Canvas>();
+                //Debug.Log(CameraCanvas.isRootCanvas);
+                //Canvas.GetComponent<Canvas>().worldCamera = MainCamera;
+
                 Camera2.SetActive(false);
                 Camera3.SetActive(false);
                 Camera4.SetActive(false);
@@ -385,10 +399,16 @@ public class CarMove : MonoBehaviour
         if (TextOnOff == 0)
         {
             Text.SetActive(false);
+            Text2.SetActive(false);
+            Text3.SetActive(false);
+            Text4.SetActive(false);
         }
         if (TextOnOff == 1)
         {
             Text.SetActive(true);
+            Text2.SetActive(true);
+            Text3.SetActive(true);
+            Text4.SetActive(true);
 
             if (Input.GetKey(KeyCode.R))
             {
@@ -501,6 +521,9 @@ public class CarMove : MonoBehaviour
         if (other.CompareTag("Finish"))
         {
             GoalText.SetActive(true);
+            GoalText2.SetActive(true);
+            GoalText3.SetActive(true);
+            GoalText4.SetActive(true);
             CheckPointNumber = 4;
         }
 
@@ -597,16 +620,11 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：カメラを切り替えた時に、テキストが位置回転変更するスクリプトを作る
+//次回やること：複製されたキャンバスの中のテキストのコピーをどんどんする。次回はStartTextから。
 //その先　　　：・モブ、アイテム　・最終的にはオンライン、対戦など
-//参考URL 　 ：参考になるかわからないけど、　　https://qiita.com/Maru60014236/items/0e3eb6c60307fa083117
+//参考URL 　 ：なし
 
 
 //CP場所記録　CP1 -95, 21,-86 180度回転
 //　　　  　　CP2 -81, 31, 95 初期向きから左に90度回転
 //　　  　　　CP3  95, 32, 24 0度
-
-//テキスト位置　CAMERA1　
-//　　　　　　　CAMERA2　
-//　　　　　　　CAMERA3　
-//　　　　　　　CAMERA4　
