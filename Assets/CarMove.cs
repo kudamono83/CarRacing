@@ -8,7 +8,7 @@ public class CarMove : MonoBehaviour
 {
     const float ACCELERATION = 0.00075f;
     const float DECELERATION = -0.001f;
-    const float DECELERATION2 = -0.0005f;
+    const float DECELERATION2 = -0.0003f;
     const float BACKACCELERATION = 0.0002f;
     const float BACKDECELERATION = -0.001f;
     const float BACKDECELERATION2 = -0.0003f;
@@ -16,6 +16,11 @@ public class CarMove : MonoBehaviour
     const float MAX_BREAK_SPEED = -1.0f;
     const float MAX_BACK_SPEED = 0.125f;
     const float ROT_SPEED = 1.0f;
+
+    const float SPACCELERATION = 0.00225f;
+    const float SPDECELERATION = -0.003f;
+    const float SPMAX_SPEED = 1.5f;
+    const float SPMAX_BREAK_SPEED = -3.0f;
 
     int CheckPointNumber;
     //int OldCheckPointNumber;
@@ -35,7 +40,10 @@ public class CarMove : MonoBehaviour
     public GameObject GoalText3;
     public GameObject GoalText4;
 
-    public Text SpeedText;
+    public Text SpeedText1;
+    public Text SpeedText2;
+    public Text SpeedText3;
+    public Text SpeedText4;
     Canvas CameraCanvas;
     public GameObject Canvas;
     //public Camera MainCamera;
@@ -58,6 +66,7 @@ public class CarMove : MonoBehaviour
     float speed;
     float breakSpeed;
     float backSpeed;
+    int ItemNumber;
     //int kph;
     //float bendSpeed;
     //float reallybackSpeed;
@@ -66,6 +75,8 @@ public class CarMove : MonoBehaviour
     Vector3 tmp;
     double y;
 
+    int kph;
+
 
     // Start is called before the first frame update
     void Start()
@@ -73,6 +84,7 @@ public class CarMove : MonoBehaviour
         speed = 0;
         breakSpeed = 0;
         backSpeed = 0;
+        ItemNumber = 0;
         move = Vector3.zero;
         rb = GetComponent<Rigidbody>();
 
@@ -114,9 +126,21 @@ public class CarMove : MonoBehaviour
     void Update()
     {
         //Debug.Log ();
+        if (ItemNumber == 0)
+        {
+            kph = Mathf.RoundToInt(300 * (speed + backSpeed));
+        }
 
-        int kph = Mathf.RoundToInt(300 * (speed + backSpeed));
-        SpeedText.text = kph.ToString("000");
+        if (ItemNumber == 1)
+        {
+            kph = Mathf.RoundToInt(900 * (speed + backSpeed));
+        }
+
+        //int kph = Mathf.RoundToInt(300 * (speed + backSpeed));
+        SpeedText1.text = kph.ToString("000");
+        SpeedText2.text = kph.ToString("000");
+        SpeedText3.text = kph.ToString("000");
+        SpeedText4.text = kph.ToString("000");
 
         Transform myTransform = this.transform;
         Vector3 worldAngle = myTransform.eulerAngles;
@@ -191,19 +215,68 @@ public class CarMove : MonoBehaviour
 
         StartCoroutine(WaitSignal(4, () =>
         {
-            if (Input.GetKey(KeyCode.UpArrow) && speed < MAX_SPEED) 
+            if (ItemNumber == 0)
             {
-                speed += ACCELERATION;
-            }
-            else 
-            {
-                if (speed > 0 ) 
+                if (Input.GetKey(KeyCode.UpArrow) && speed < MAX_SPEED) 
                 {
-                    speed += DECELERATION2;
+                    speed += ACCELERATION;
                 }
                 else 
                 {
-                    speed = 0;
+                    if (speed > 0 ) 
+                    {
+                        speed += DECELERATION2;
+                    }   
+                    else 
+                    {
+                        speed = 0;
+                    }
+                }
+
+                if (Input.GetKey(KeyCode.Space) && breakSpeed > MAX_BREAK_SPEED) 
+                {
+                    if (speed > 0)
+                    {
+                        speed += DECELERATION;
+                    }
+
+                    if (backSpeed < 0)
+                    {
+                        backSpeed -= BACKDECELERATION;
+                    }
+                }
+            }
+
+
+            if (ItemNumber == 1)
+            {
+                if (Input.GetKey(KeyCode.UpArrow) && speed < SPMAX_SPEED) 
+                {
+                    speed += SPACCELERATION;
+                }
+                else 
+                {
+                    if (speed > 0 ) 
+                    {
+                        speed += DECELERATION2;
+                    }
+                    else 
+                    {
+                        speed = 0;
+                    }
+                }
+
+                if (Input.GetKey(KeyCode.Space) && breakSpeed > SPMAX_BREAK_SPEED) 
+                {
+                    if (speed > 0)
+                    {
+                        speed += SPDECELERATION;
+                    }
+
+                    if (backSpeed < 0)
+                    {
+                        backSpeed -= BACKDECELERATION;
+                    }
                 }
             }
 
@@ -239,18 +312,6 @@ public class CarMove : MonoBehaviour
                 //}
             //}
 
-            if (Input.GetKey(KeyCode.Space) && breakSpeed > MAX_BREAK_SPEED) 
-            {
-                if (speed > 0)
-                {
-                    speed += DECELERATION;
-                }
-
-                if (backSpeed < 0)
-                {
-                    backSpeed -= BACKDECELERATION;
-                }
-            }
             //else 
             //{
                 
@@ -527,6 +588,12 @@ public class CarMove : MonoBehaviour
             CheckPointNumber = 4;
         }
 
+        if (other.CompareTag("Item1"))
+        {
+            ItemNumber = 1;
+            Debug.Log("わーい");
+        }
+
 
         //
 
@@ -620,7 +687,7 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：複製されたキャンバスの中のテキストのコピーをどんどんする。次回はStartTextから。
+//次回やること：アイテムの使用練習。速度が三倍になるアイテム作成。数値だけ三倍になっているから、車の速度も三倍になるようにプログラムする。
 //その先　　　：・モブ、アイテム　・最終的にはオンライン、対戦など
 //参考URL 　 ：なし
 

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CheckPoint
   - ReverseRunText
+  - Item1
+  - Item2
   layers:
   - Default
   - TransparentFX
