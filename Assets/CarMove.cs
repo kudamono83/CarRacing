@@ -66,7 +66,10 @@ public class CarMove : MonoBehaviour
     float speed;
     float breakSpeed;
     float backSpeed;
+
     int ItemNumber;
+    int ItemNumber2;
+    int rnd;
     //int kph;
     //float bendSpeed;
     //float reallybackSpeed;
@@ -85,6 +88,8 @@ public class CarMove : MonoBehaviour
         breakSpeed = 0;
         backSpeed = 0;
         ItemNumber = 0;
+        ItemNumber2 = 0;
+        rnd = 0;
         move = Vector3.zero;
         rb = GetComponent<Rigidbody>();
 
@@ -126,15 +131,15 @@ public class CarMove : MonoBehaviour
     void Update()
     {
         //Debug.Log ();
-        if (ItemNumber == 0)
-        {
+        //if (ItemNumber == 0)
+        //{
             kph = Mathf.RoundToInt(300 * (speed + backSpeed));
-        }
+        //}
 
-        if (ItemNumber == 1)
-        {
-            kph = Mathf.RoundToInt(900 * (speed + backSpeed));
-        }
+        //if (ItemNumber == 1)
+        //{
+            //kph = Mathf.RoundToInt(900 * (speed + backSpeed));
+        //}
 
         //int kph = Mathf.RoundToInt(300 * (speed + backSpeed));
         SpeedText1.text = kph.ToString("000");
@@ -198,6 +203,13 @@ public class CarMove : MonoBehaviour
             myTransform.eulerAngles = worldAngle;
         }
 
+        if (Input.GetKey(KeyCode.I))
+        {
+            Debug.Log(ItemNumber);
+            Debug.Log(ItemNumber2);
+            //Debug.Log(rnd);
+        }
+
 
         tmp = gameObject.GetComponent<Transform>().position;
         y = tmp.y;
@@ -215,8 +227,8 @@ public class CarMove : MonoBehaviour
 
         StartCoroutine(WaitSignal(4, () =>
         {
-            if (ItemNumber == 0)
-            {
+            //if (ItemNumber == 0)
+            //{
                 if (Input.GetKey(KeyCode.UpArrow) && speed < MAX_SPEED) 
                 {
                     speed += ACCELERATION;
@@ -245,40 +257,40 @@ public class CarMove : MonoBehaviour
                         backSpeed -= BACKDECELERATION;
                     }
                 }
-            }
+            //}
 
 
-            if (ItemNumber == 1)
-            {
-                if (Input.GetKey(KeyCode.UpArrow) && speed < SPMAX_SPEED) 
-                {
-                    speed += SPACCELERATION;
-                }
-                else 
-                {
-                    if (speed > 0 ) 
-                    {
-                        speed += DECELERATION2;
-                    }
-                    else 
-                    {
-                        speed = 0;
-                    }
-                }
+            //if (ItemNumber == 1)
+            //{
+                //if (Input.GetKey(KeyCode.UpArrow) && speed < SPMAX_SPEED) 
+                //{
+                    //speed += SPACCELERATION;
+                //}
+                //else 
+                //{
+                    //if (speed > 0 ) 
+                    //{
+                        //speed += DECELERATION2;
+                    //}
+                    //else 
+                    //{
+                        //speed = 0;
+                    //}
+                //}
 
-                if (Input.GetKey(KeyCode.Space) && breakSpeed > SPMAX_BREAK_SPEED) 
-                {
-                    if (speed > 0)
-                    {
-                        speed += SPDECELERATION;
-                    }
+                //if (Input.GetKey(KeyCode.Space) && breakSpeed > SPMAX_BREAK_SPEED) 
+                //{
+                    //if (speed > 0)
+                    //{
+                        //speed += SPDECELERATION;
+                    //}
 
-                    if (backSpeed < 0)
-                    {
-                        backSpeed -= BACKDECELERATION;
-                    }
-                }
-            }
+                    //if (backSpeed < 0)
+                    //{
+                        //backSpeed -= BACKDECELERATION;
+                    //}
+                //}
+            //}
 
             if (Input.GetKey(KeyCode.DownArrow) && backSpeed < MAX_BACK_SPEED) 
             {
@@ -391,16 +403,16 @@ public class CarMove : MonoBehaviour
 
             //reallybackSpeed = backSpeed / backSpeed * 2;
 
-            if (ItemNumber == 0)
-            {
+            //if (ItemNumber == 0)
+            //{
                 move = transform.up * (speed + backSpeed);
-            }
+           // }
 
-            if (ItemNumber == 1)
-            {
-                move = 3 * transform.up * (speed + backSpeed);
+            //if (ItemNumber == 1)
+            //{
+                //move = 3 * transform.up * (speed + backSpeed);
 
-            }
+            //}
             //move = transform.up * (speed + backSpeed);
 
             rb.MovePosition(rb.position + move);
@@ -600,8 +612,78 @@ public class CarMove : MonoBehaviour
 
         if (other.CompareTag("Item1"))
         {
-            ItemNumber = 1;
+            rnd = UnityEngine.Random.Range(1, 201);
+
+            if (rnd <= 85)
+            {
+                rnd = UnityEngine.Random.Range(11, 20);
+
+                if (ItemNumber == 0)
+                {
+                    ItemNumber = rnd;
+                }
+                else
+                {
+                    if (ItemNumber2 == 0)
+                    {
+                        ItemNumber2 = rnd;
+                    }
+                }
+            }
+
+            if ((rnd >= 86) && (rnd <= 170))
+            {
+                rnd = UnityEngine.Random.Range(21, 25);
+
+                if (ItemNumber == 0)
+                {
+                    ItemNumber = rnd;
+                }
+                else
+                {
+                    if (ItemNumber2 == 0)
+                    {
+                        ItemNumber2 = rnd;
+                    }
+                }
+            }
+
+            if (rnd >= 171)
+            {
+                rnd = UnityEngine.Random.Range(31, 34);
+
+                if (ItemNumber == 0)
+                {
+                    ItemNumber = rnd;
+                }
+                else
+                {
+                    if (ItemNumber2 == 0)
+                    {
+                        ItemNumber2 = rnd;
+                    }
+                }
+            }
+
+            //ItemNumber = 1;
             //Debug.Log("わーい");
+        }
+
+        if (other.CompareTag("Item2"))
+        {
+            rnd = UnityEngine.Random.Range(1, 8);
+
+            if (ItemNumber == 0)
+            {
+                ItemNumber = rnd;
+            }
+            else
+            {
+                if (ItemNumber2 == 0)
+                {
+                    ItemNumber2 = rnd;
+                }
+            }
         }
 
 
@@ -697,10 +779,11 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
+//次回やること：Itemを取った時に、ItemNumberとItemNumber2両方違う数字で登録される現象を修正
 //リスポーン時間、作ってもいいかも。一定時間orキー連打でリスポーン早くなるとか
 //作るなら、リスポーン時間短縮などのアイテムを追加するのもあり。
 //次回以降やること：アイテム作成。いろいろ作っていこう！
-//その先　　　：・モブ　＊出来れば・CPUと対戦　・オンライン対戦　＊最終的には・unityroomで公開
+//その先　　　：・モブ　＊出来れば...　・CPUと対戦　・オンライン対戦　＊最終的には・unityroomで公開
 //参考URL 　 ：なし
 
 
@@ -731,6 +814,7 @@ public class CarMove : MonoBehaviour
 //21・パンクタイヤ：15秒間、通常時より全ての性能が0.5倍
 //22・減速強化：10秒間、通常時より加速と最高時速が0.3倍、ブレーキが3倍。
 //23・ハンドル故障：15秒間、通常時より回転速度が0.5倍
+//24・壊れた爆弾：すぐに自爆。周りへの被害なし。
 
 //31・ワープ：レースの場所のどこかにワープする。
 //32・魔法の杖：自分の姿が見えなくなり、敵から攻撃されなくなる。自分もどこを走っているか見えない。
