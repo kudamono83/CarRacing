@@ -17,10 +17,10 @@ public class CarMove : MonoBehaviour
     const float MAX_BACK_SPEED = 0.125f;
     const float ROT_SPEED = 1.0f;
 
-    const float SPACCELERATION = 0.00225f;
-    const float SPDECELERATION = -0.003f;
-    const float SPMAX_SPEED = 1.5f;
-    const float SPMAX_BREAK_SPEED = -3.0f;
+    //const float SPACCELERATION = 0.00225f;
+    //const float SPDECELERATION = -0.003f;
+    //const float SPMAX_SPEED = 1.5f;
+    //const float SPMAX_BREAK_SPEED = -3.0f;
 
     int CheckPointNumber;
     //int OldCheckPointNumber;
@@ -52,6 +52,9 @@ public class CarMove : MonoBehaviour
     public GameObject Camera3;
     public GameObject Camera4;
 
+    public GameObject Item1;
+    public GameObject Item2;
+
     //public Camera mainCamera;
     //public Camera subCamera;
 
@@ -69,6 +72,7 @@ public class CarMove : MonoBehaviour
 
     int ItemNumber;
     int ItemNumber2;
+    int UseItem;
     int rnd;
     //int kph;
     //float bendSpeed;
@@ -120,6 +124,9 @@ public class CarMove : MonoBehaviour
         Camera4.SetActive(false);
         MainCamera.SetActive(true);
 
+        Item1.SetActive(true);
+        Item2.SetActive(true);
+
         //mainCamera = GameObject.Find("MainCamera");
         //subCamera = GameObject.Find("SubCamera");
 
@@ -131,15 +138,14 @@ public class CarMove : MonoBehaviour
     void Update()
     {
         //Debug.Log ();
-        //if (ItemNumber == 0)
-        //{
+        if (UseItem == 1)
+        {
+            kph = Mathf.RoundToInt(360 * (speed + backSpeed));
+        }
+        else
+        {
             kph = Mathf.RoundToInt(300 * (speed + backSpeed));
-        //}
-
-        //if (ItemNumber == 1)
-        //{
-            //kph = Mathf.RoundToInt(900 * (speed + backSpeed));
-        //}
+        }
 
         //int kph = Mathf.RoundToInt(300 * (speed + backSpeed));
         SpeedText1.text = kph.ToString("000");
@@ -205,11 +211,22 @@ public class CarMove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.I))
         {
+            //if (ItemNumber == 0)
+            //{
+
+            //}
+            //else
+            //{
+                UseItem = ItemNumber;
+            //}
+        }
+
+        if (Input.GetKey(KeyCode.O))
+        {
             Debug.Log(ItemNumber);
             Debug.Log(ItemNumber2);
             //Debug.Log(rnd);
         }
-
 
         tmp = gameObject.GetComponent<Transform>().position;
         y = tmp.y;
@@ -231,13 +248,27 @@ public class CarMove : MonoBehaviour
             //{
                 if (Input.GetKey(KeyCode.UpArrow) && speed < MAX_SPEED) 
                 {
-                    speed += ACCELERATION;
+                    if (ItemNumber == 1)
+                    {
+                        speed += (ACCELERATION * 1.2f);
+                    }
+                    else
+                    {
+                        speed += ACCELERATION;
+                    }
                 }
                 else 
                 {
                     if (speed > 0 ) 
                     {
-                        speed += DECELERATION2;
+                        if (ItemNumber == 1)
+                        {
+                            speed += (DECELERATION2 * 1.2f);
+                        }
+                        else
+                        {
+                            speed += DECELERATION2;
+                        }
                     }   
                     else 
                     {
@@ -249,12 +280,27 @@ public class CarMove : MonoBehaviour
                 {
                     if (speed > 0)
                     {
-                        speed += DECELERATION;
+                        if (ItemNumber == 1)
+                        {
+                            speed += (DECELERATION * 1.2f);
+                        }
+                        else
+                        {
+                            speed += DECELERATION;
+                        }
                     }
+
 
                     if (backSpeed < 0)
                     {
-                        backSpeed -= BACKDECELERATION;
+                        if (ItemNumber == 1)
+                        {
+                            backSpeed -= (BACKDECELERATION * 1.2f);
+                        }
+                        else
+                        {
+                            backSpeed -= BACKDECELERATION;
+                        }
                     }
                 }
             //}
@@ -294,13 +340,27 @@ public class CarMove : MonoBehaviour
 
             if (Input.GetKey(KeyCode.DownArrow) && backSpeed < MAX_BACK_SPEED) 
             {
-                backSpeed -= BACKACCELERATION;
+                if (ItemNumber == 1)
+                {
+                    backSpeed -= (BACKACCELERATION * 1.2f);
+                }
+                else
+                {
+                    backSpeed -= BACKACCELERATION;
+                }
             }
             else 
             {
                 if (backSpeed < 0 ) 
                 {
-                    backSpeed -= BACKDECELERATION2;
+                    if (ItemNumber == 1)
+                    {
+                        backSpeed -= (BACKDECELERATION2 * 1.2f);
+                    }   
+                    else
+                    {
+                        backSpeed -= BACKDECELERATION2;
+                    }
                 }
                 else 
                 {
@@ -340,14 +400,30 @@ public class CarMove : MonoBehaviour
 
             if (Input.GetKey(KeyCode.RightArrow)) 
             {
-                Quaternion turnRotation = Quaternion.Euler(0f, 0f, ROT_SPEED);
-                rb.MoveRotation(rb.rotation * turnRotation);
+                if (ItemNumber == 1)
+                {
+                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, (ROT_SPEED * 1.2f));
+                    rb.MoveRotation(rb.rotation * turnRotation);
+                }
+                else
+                {
+                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, ROT_SPEED);
+                    rb.MoveRotation(rb.rotation * turnRotation);
+                }
             }
 
             if (Input.GetKey(KeyCode.LeftArrow)) 
             {
-                Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
-                rb.MoveRotation(rb.rotation * turnRotation);
+                if (ItemNumber == 1)
+                {
+                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, (-ROT_SPEED * 1.2f));
+                    rb.MoveRotation(rb.rotation * turnRotation);
+                }
+                else
+                {
+                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
+                    rb.MoveRotation(rb.rotation * turnRotation);
+                }
             }
 
             //if(Input.GetKey(KeyCode.C))
@@ -621,12 +697,14 @@ public class CarMove : MonoBehaviour
                 if (ItemNumber == 0)
                 {
                     ItemNumber = rnd;
+                    Item1.SetActive(false);
                 }
                 else
                 {
                     if (ItemNumber2 == 0)
                     {
                         ItemNumber2 = rnd;
+                        Item1.SetActive(false);
                     }
                 }
             }
@@ -638,12 +716,14 @@ public class CarMove : MonoBehaviour
                 if (ItemNumber == 0)
                 {
                     ItemNumber = rnd;
+                    Item1.SetActive(false);
                 }
                 else
                 {
                     if (ItemNumber2 == 0)
                     {
                         ItemNumber2 = rnd;
+                        Item1.SetActive(false);
                     }
                 }
             }
@@ -655,12 +735,14 @@ public class CarMove : MonoBehaviour
                 if (ItemNumber == 0)
                 {
                     ItemNumber = rnd;
+                    Item1.SetActive(false);
                 }
                 else
                 {
                     if (ItemNumber2 == 0)
                     {
                         ItemNumber2 = rnd;
+                        Item1.SetActive(false);
                     }
                 }
             }
@@ -676,12 +758,14 @@ public class CarMove : MonoBehaviour
             if (ItemNumber == 0)
             {
                 ItemNumber = rnd;
+                Item2.SetActive(false);
             }
             else
             {
                 if (ItemNumber2 == 0)
                 {
                     ItemNumber2 = rnd;
+                    Item2.SetActive(false);
                 }
             }
         }
@@ -779,10 +863,12 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：Itemを取った時に、ItemNumberとItemNumber2両方違う数字で登録される現象を修正
+//次回やること：Item1個目の性能倍率を調整(1.2?、1.5?)、2個目以降も作る
+
 //リスポーン時間、作ってもいいかも。一定時間orキー連打でリスポーン早くなるとか
 //作るなら、リスポーン時間短縮などのアイテムを追加するのもあり。
-//次回以降やること：アイテム作成。いろいろ作っていこう！
+
+//次回以降やること：アイテム作成
 //その先　　　：・モブ　＊出来れば...　・CPUと対戦　・オンライン対戦　＊最終的には・unityroomで公開
 //参考URL 　 ：なし
 
@@ -792,20 +878,20 @@ public class CarMove : MonoBehaviour
 //　　  　　　CP3  95, 32, 24 0度
 
 //?アイテム
-//1・タイヤ強化：20秒間、通常時より全ての性能が1.2倍。
-//2・加速強化：15秒間、通常時より加速と最高時速が1.5倍、ブレーキが0.75倍
-//3・ハンドル強化：20秒間、通常時より回転速度が1.4倍
+//1・タイヤ強化：20秒間、通常時より全ての性能が1.5倍。
+//2・加速強化：15秒間、通常時より加速と最高時速が2倍、ブレーキが0.5倍
+//3・ハンドル強化：20秒間、通常時より回転速度が1.5倍
 //4・レーザー：3回分。ロックオンなし。当たると一定時間動けない。
 //5・ロケット：1回。ロックオンあり。当たると一定時間動けない。
 //6・爆弾：1回分。ロックオンなし。当たると一定時間動けない。自爆あり。20秒間持っていると自爆。地面についた3秒後に爆発。
 //7・鎧：20秒間、攻撃を無効化。一定以上ダメージを食らうと鎧は壊れる。
 
 //!アイテム
-//11・タイヤ超強化：15秒間、通常時より全ての性能が2倍。
-//12・加速強化：10秒間、通常時より加速と最高時速が3倍、ブレーキが1.5倍
+//11・タイヤ超強化：15秒間、通常時より全ての性能が2.5倍。
+//12・加速強化：10秒間、通常時より加速と最高時速が3倍
 //13・ハンドル強化：15秒間、通常時より回転速度が2倍
-//14・ワープ：レースの場所のどこかにワープする。
-//15・魔法の杖：自分の姿が見えなくなり、敵から攻撃されなくなる。自分もどこを走っているか見えない。
+//14・上昇気流：10秒間、空も走行できる。
+//15・呪文：ランダムで選ばれた敵(3体くらい?)が倒される。(一定時間動けない)
 //16・危ない爆弾：1回分。ロックオンなし。当たると一定時間動けない。5秒間持っていると自爆。それ以外は自爆なし。地面についた1秒後に広範囲爆発。
 //17・レーザーマシン：自分の向いている方向の90°に発射。ロックオンなし。当たると一定時間動けない。
 //18・火の玉：3回同時発射。ロックオンあり。当たると一定時間動けない。
