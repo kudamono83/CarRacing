@@ -74,6 +74,7 @@ public class CarMove : MonoBehaviour
     int ItemNumber2;
     int UseItem;
     int rnd;
+    //bool IPush = false;
     //int kph;
     //float bendSpeed;
     //float reallybackSpeed;
@@ -93,9 +94,12 @@ public class CarMove : MonoBehaviour
         backSpeed = 0;
         ItemNumber = 0;
         ItemNumber2 = 0;
+        UseItem = 0;
         rnd = 0;
         move = Vector3.zero;
         rb = GetComponent<Rigidbody>();
+
+        StartCoroutine("ItemTime");
 
         CheckPointNumber = 0;
         //Text.SetActive(false);
@@ -140,7 +144,7 @@ public class CarMove : MonoBehaviour
         //Debug.Log ();
         if (UseItem == 1)
         {
-            kph = Mathf.RoundToInt(360 * (speed + backSpeed));
+            kph = Mathf.RoundToInt(450 * (speed + backSpeed));
         }
         else
         {
@@ -217,8 +221,12 @@ public class CarMove : MonoBehaviour
             //}
             //else
             //{
+            if (UseItem == 0)
+            {
                 UseItem = ItemNumber;
-            //}
+                //IPush = true;
+                StartCoroutine(ItemTime());
+            }
         }
 
         if (Input.GetKey(KeyCode.O))
@@ -248,9 +256,9 @@ public class CarMove : MonoBehaviour
             //{
                 if (Input.GetKey(KeyCode.UpArrow) && speed < MAX_SPEED) 
                 {
-                    if (ItemNumber == 1)
+                    if (UseItem == 1)
                     {
-                        speed += (ACCELERATION * 1.2f);
+                        speed += (ACCELERATION * 1.5f);
                     }
                     else
                     {
@@ -261,9 +269,9 @@ public class CarMove : MonoBehaviour
                 {
                     if (speed > 0 ) 
                     {
-                        if (ItemNumber == 1)
+                        if (UseItem == 1)
                         {
-                            speed += (DECELERATION2 * 1.2f);
+                            speed += (DECELERATION2 * 1.5f);
                         }
                         else
                         {
@@ -280,9 +288,9 @@ public class CarMove : MonoBehaviour
                 {
                     if (speed > 0)
                     {
-                        if (ItemNumber == 1)
+                        if (UseItem == 1)
                         {
-                            speed += (DECELERATION * 1.2f);
+                            speed += (DECELERATION * 1.5f);
                         }
                         else
                         {
@@ -293,9 +301,9 @@ public class CarMove : MonoBehaviour
 
                     if (backSpeed < 0)
                     {
-                        if (ItemNumber == 1)
+                        if (UseItem == 1)
                         {
-                            backSpeed -= (BACKDECELERATION * 1.2f);
+                            backSpeed -= (BACKDECELERATION * 1.5f);
                         }
                         else
                         {
@@ -340,9 +348,9 @@ public class CarMove : MonoBehaviour
 
             if (Input.GetKey(KeyCode.DownArrow) && backSpeed < MAX_BACK_SPEED) 
             {
-                if (ItemNumber == 1)
+                if (UseItem == 1)
                 {
-                    backSpeed -= (BACKACCELERATION * 1.2f);
+                    backSpeed -= (BACKACCELERATION * 1.5f);
                 }
                 else
                 {
@@ -353,9 +361,9 @@ public class CarMove : MonoBehaviour
             {
                 if (backSpeed < 0 ) 
                 {
-                    if (ItemNumber == 1)
+                    if (UseItem == 1)
                     {
-                        backSpeed -= (BACKDECELERATION2 * 1.2f);
+                        backSpeed -= (BACKDECELERATION2 * 1.5f);
                     }   
                     else
                     {
@@ -400,9 +408,9 @@ public class CarMove : MonoBehaviour
 
             if (Input.GetKey(KeyCode.RightArrow)) 
             {
-                if (ItemNumber == 1)
+                if (UseItem == 1)
                 {
-                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, (ROT_SPEED * 1.2f));
+                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, (ROT_SPEED * 1.5f));
                     rb.MoveRotation(rb.rotation * turnRotation);
                 }
                 else
@@ -414,9 +422,9 @@ public class CarMove : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftArrow)) 
             {
-                if (ItemNumber == 1)
+                if (UseItem == 1)
                 {
-                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, (-ROT_SPEED * 1.2f));
+                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, (-ROT_SPEED * 1.5f));
                     rb.MoveRotation(rb.rotation * turnRotation);
                 }
                 else
@@ -753,7 +761,7 @@ public class CarMove : MonoBehaviour
 
         if (other.CompareTag("Item2"))
         {
-            rnd = UnityEngine.Random.Range(1, 8);
+            rnd = UnityEngine.Random.Range(1, 2);
 
             if (ItemNumber == 0)
             {
@@ -860,10 +868,23 @@ public class CarMove : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         action();
     }
+
+    private IEnumerator ItemTime()
+    {
+        if (UseItem == 1)
+        {
+            //UseItem = 0;
+            //Debug.Log(UseItem);
+            yield return new WaitForSeconds(20.0f);
+            //Debug.Log("test");
+            UseItem = 0;
+            ItemNumber = 0;
+        }
+    }
 }
 
 //メモ
-//次回やること：Item1個目の性能倍率を調整(1.2?、1.5?)、2個目以降も作る
+//次回やること：Item2個目から。アイテム確率変更やり忘れに注意！
 
 //リスポーン時間、作ってもいいかも。一定時間orキー連打でリスポーン早くなるとか
 //作るなら、リスポーン時間短縮などのアイテムを追加するのもあり。
