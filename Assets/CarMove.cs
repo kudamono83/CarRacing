@@ -148,7 +148,22 @@ public class CarMove : MonoBehaviour
         }
         else
         {
-            kph = Mathf.RoundToInt(300 * (speed + backSpeed));
+            if (UseItem == 2)
+            {
+                if (Input.GetKey(KeyCode.DownArrow) && speed == 0) 
+                {
+                    kph = Mathf.RoundToInt(600 * backSpeed);
+                }
+                else
+                {
+                    kph = Mathf.RoundToInt((600 * speed) + (150 * backSpeed));
+                }
+
+            }
+            else
+            {
+                kph = Mathf.RoundToInt(300 * (speed + backSpeed));
+            }
         }
 
         //int kph = Mathf.RoundToInt(300 * (speed + backSpeed));
@@ -262,7 +277,14 @@ public class CarMove : MonoBehaviour
                     }
                     else
                     {
-                        speed += ACCELERATION;
+                        if (UseItem == 2)
+                        {
+                            speed += (ACCELERATION * 2.0f);
+                        }
+                        else
+                        {
+                            speed += ACCELERATION;
+                        }
                     }
                 }
                 else 
@@ -275,7 +297,14 @@ public class CarMove : MonoBehaviour
                         }
                         else
                         {
-                            speed += DECELERATION2;
+                            if (UseItem == 2)
+                            {
+                                speed += (DECELERATION2 * 0.5f);
+                            }
+                            else
+                            {
+                                speed += DECELERATION2;
+                            }
                         }
                     }   
                     else 
@@ -294,7 +323,14 @@ public class CarMove : MonoBehaviour
                         }
                         else
                         {
-                            speed += DECELERATION;
+                            if (UseItem == 2)
+                            {
+                                speed += (DECELERATION * 0.5f);
+                            }
+                            else
+                            {
+                                speed += DECELERATION;
+                            }
                         }
                     }
 
@@ -307,7 +343,14 @@ public class CarMove : MonoBehaviour
                         }
                         else
                         {
-                            backSpeed -= BACKDECELERATION;
+                            if (UseItem == 2)
+                            {
+                                backSpeed -= (BACKDECELERATION * 0.5f);
+                            }
+                            else
+                            {
+                                backSpeed -= BACKDECELERATION;
+                            }   
                         }
                     }
                 }
@@ -346,7 +389,7 @@ public class CarMove : MonoBehaviour
                 //}
             //}
 
-            if (Input.GetKey(KeyCode.DownArrow) && backSpeed < MAX_BACK_SPEED) 
+            if (Input.GetKey(KeyCode.DownArrow) && backSpeed < MAX_BACK_SPEED && speed == 0) 
             {
                 if (UseItem == 1)
                 {
@@ -354,7 +397,15 @@ public class CarMove : MonoBehaviour
                 }
                 else
                 {
-                    backSpeed -= BACKACCELERATION;
+                    if (UseItem == 2)
+                    {
+                        //kph = Mathf.RoundToInt(600 * (speed + backSpeed));
+                        backSpeed -= (BACKACCELERATION * 2.0f);
+                    }
+                    else
+                    {
+                        backSpeed -= BACKACCELERATION;
+                    }
                 }
             }
             else 
@@ -367,7 +418,14 @@ public class CarMove : MonoBehaviour
                     }   
                     else
                     {
-                        backSpeed -= BACKDECELERATION2;
+                        if (UseItem == 2)
+                        {
+                            backSpeed -= (BACKDECELERATION2 * 0.5f);
+                        }
+                        else
+                        {
+                            backSpeed -= BACKDECELERATION2;
+                        }
                     }
                 }
                 else 
@@ -415,8 +473,16 @@ public class CarMove : MonoBehaviour
                 }
                 else
                 {
-                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, ROT_SPEED);
-                    rb.MoveRotation(rb.rotation * turnRotation);
+                    if (UseItem == 3)
+                    {
+                        Quaternion turnRotation = Quaternion.Euler(0f, 0f, (ROT_SPEED * 2.0f));
+                        rb.MoveRotation(rb.rotation * turnRotation);
+                    }
+                    else
+                    {
+                        Quaternion turnRotation = Quaternion.Euler(0f, 0f, ROT_SPEED);
+                        rb.MoveRotation(rb.rotation * turnRotation);
+                    }
                 }
             }
 
@@ -429,8 +495,16 @@ public class CarMove : MonoBehaviour
                 }
                 else
                 {
-                    Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
-                    rb.MoveRotation(rb.rotation * turnRotation);
+                    if (UseItem == 3)
+                    {
+                        Quaternion turnRotation = Quaternion.Euler(0f, 0f, (-ROT_SPEED * 2.0f));
+                        rb.MoveRotation(rb.rotation * turnRotation);
+                    }
+                    else
+                    {
+                        Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
+                        rb.MoveRotation(rb.rotation * turnRotation);
+                    }
                 }
             }
 
@@ -761,7 +835,7 @@ public class CarMove : MonoBehaviour
 
         if (other.CompareTag("Item2"))
         {
-            rnd = UnityEngine.Random.Range(1, 2);
+            rnd = UnityEngine.Random.Range(3, 4);
 
             if (ItemNumber == 0)
             {
@@ -880,11 +954,25 @@ public class CarMove : MonoBehaviour
             UseItem = 0;
             ItemNumber = 0;
         }
+
+        if (UseItem == 2)
+        {
+            yield return new WaitForSeconds(15.0f);
+            UseItem = 0;
+            ItemNumber = 0;
+        }
+
+        if (UseItem == 3)
+        {
+            yield return new WaitForSeconds(20.0f);
+            UseItem = 0;
+            ItemNumber = 0;
+        }
     }
 }
 
 //メモ
-//次回やること：Item2個目から。アイテム確率変更やり忘れに注意！
+//次回やること：Item4個目から。レーザーの当たり判定あるのか？？etc.
 
 //リスポーン時間、作ってもいいかも。一定時間orキー連打でリスポーン早くなるとか
 //作るなら、リスポーン時間短縮などのアイテムを追加するのもあり。
@@ -901,7 +989,7 @@ public class CarMove : MonoBehaviour
 //?アイテム
 //1・タイヤ強化：20秒間、通常時より全ての性能が1.5倍。
 //2・加速強化：15秒間、通常時より加速と最高時速が2倍、ブレーキが0.5倍
-//3・ハンドル強化：20秒間、通常時より回転速度が1.5倍
+//3・ハンドル強化：20秒間、通常時より回転速度が2倍
 //4・レーザー：3回分。ロックオンなし。当たると一定時間動けない。
 //5・ロケット：1回。ロックオンあり。当たると一定時間動けない。
 //6・爆弾：1回分。ロックオンなし。当たると一定時間動けない。自爆あり。20秒間持っていると自爆。地面についた3秒後に爆発。
