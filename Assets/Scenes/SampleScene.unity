@@ -6314,6 +6314,7 @@ MonoBehaviour:
   Camera4: {fileID: 921030365}
   Item1: {fileID: 1856653284}
   Item2: {fileID: 1879722387}
+  UseItem: 0
 --- !u!1 &897676387 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: 756fbf499a3cb4e059271502c1a465dd,
@@ -12032,19 +12033,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &1675510270
-SphereCollider:
+--- !u!114 &1675510270
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675510269}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d946b43cd73264e5d82de8423f460599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &1675510271
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12099,7 +12099,7 @@ Transform:
   m_GameObject: {fileID: 1675510269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.343261, y: 1.453, z: 72.13}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 5}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 104

@@ -72,7 +72,7 @@ public class CarMove : MonoBehaviour
 
     int ItemNumber;
     int ItemNumber2;
-    int UseItem;
+    public int UseItem;
     int rnd;
     //bool IPush = false;
     //int kph;
@@ -84,6 +84,8 @@ public class CarMove : MonoBehaviour
     double y;
 
     int kph;
+
+    int HowManyTimes;
 
 
     // Start is called before the first frame update
@@ -130,6 +132,8 @@ public class CarMove : MonoBehaviour
 
         Item1.SetActive(true);
         Item2.SetActive(true);
+
+        HowManyTimes = 0;
 
         //mainCamera = GameObject.Find("MainCamera");
         //subCamera = GameObject.Find("SubCamera");
@@ -228,7 +232,7 @@ public class CarMove : MonoBehaviour
             myTransform.eulerAngles = worldAngle;
         }
 
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             //if (ItemNumber == 0)
             //{
@@ -241,6 +245,17 @@ public class CarMove : MonoBehaviour
                 UseItem = ItemNumber;
                 //IPush = true;
                 StartCoroutine(ItemTime());
+
+                if (UseItem == 4)
+                {
+                    HowManyTimes += 1;
+
+                    if (HowManyTimes == 3)
+                    {
+                        UseItem = 0;
+                        ItemNumber = 0;
+                    }
+                }
             }
         }
 
@@ -657,6 +672,12 @@ public class CarMove : MonoBehaviour
             }
         }
 
+        if ((ItemNumber == 0) && (ItemNumber2 > 0))
+        {
+            ItemNumber = ItemNumber2;
+            ItemNumber2 = 0;
+        }
+
 
     }
 
@@ -835,7 +856,7 @@ public class CarMove : MonoBehaviour
 
         if (other.CompareTag("Item2"))
         {
-            rnd = UnityEngine.Random.Range(3, 4);
+            rnd = UnityEngine.Random.Range(2, 3);
 
             if (ItemNumber == 0)
             {
@@ -972,7 +993,8 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：Item4個目から。レーザーの当たり判定あるのか？？etc.
+//次回やること：Item4個目途中から。レーザーを動かすスクリプト(自分を表示させる　→　車の座標に行く　→　車の向きにする　→　レーザーのような移動をする)
+//ちなみに、レーザーの当たり判定あるのか？？etc.
 
 //リスポーン時間、作ってもいいかも。一定時間orキー連打でリスポーン早くなるとか
 //作るなら、リスポーン時間短縮などのアイテムを追加するのもあり。
