@@ -70,9 +70,9 @@ public class CarMove : MonoBehaviour
     float breakSpeed;
     float backSpeed;
 
-    int ItemNumber;
+    public int ItemNumber;
     int ItemNumber2;
-    public int UseItem;
+    int UseItem;
     int rnd;
     //bool IPush = false;
     //int kph;
@@ -246,15 +246,21 @@ public class CarMove : MonoBehaviour
                 //IPush = true;
                 StartCoroutine(ItemTime());
 
-                if (UseItem == 4)
-                {
-                    HowManyTimes += 1;
+                //if (UseItem == 4)
+                //{
+                    //HowManyTimes += 1;
+                //}
+            }
 
-                    if (HowManyTimes == 3)
-                    {
-                        UseItem = 0;
-                        ItemNumber = 0;
-                    }
+            if (UseItem == 4)
+            {
+                HowManyTimes += 1;
+
+                if (HowManyTimes == 3)
+                {
+                    UseItem = 0;
+                    //ItemNumber = 0;
+                    HowManyTimes = 0;
                 }
             }
         }
@@ -263,6 +269,7 @@ public class CarMove : MonoBehaviour
         {
             Debug.Log(ItemNumber);
             Debug.Log(ItemNumber2);
+            Debug.Log(UseItem);
             //Debug.Log(rnd);
         }
 
@@ -856,7 +863,7 @@ public class CarMove : MonoBehaviour
 
         if (other.CompareTag("Item2"))
         {
-            rnd = UnityEngine.Random.Range(2, 3);
+            rnd = UnityEngine.Random.Range(4, 5);
 
             if (ItemNumber == 0)
             {
@@ -993,7 +1000,8 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：Item4個目途中から。レーザーを動かすスクリプト(自分を表示させる　→　車の座標に行く　→　車の向きにする　→　レーザーのような移動をする)
+//次回やること：Item4個目途中から。レーザーを動かすスクリプト(車の座標に行く　→　車の向きにする　→　レーザーのような移動をする)
+//　　　　　　：車の座標がスタートのところになってるので、現在地点座標を求める方法を調べる。
 //ちなみに、レーザーの当たり判定あるのか？？etc.
 
 //リスポーン時間、作ってもいいかも。一定時間orキー連打でリスポーン早くなるとか

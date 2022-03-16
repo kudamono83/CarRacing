@@ -6314,7 +6314,7 @@ MonoBehaviour:
   Camera4: {fileID: 921030365}
   Item1: {fileID: 1856653284}
   Item2: {fileID: 1879722387}
-  UseItem: 0
+  ItemNumber: 0
 --- !u!1 &897676387 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: 756fbf499a3cb4e059271502c1a465dd,
@@ -12098,7 +12098,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675510269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.343261, y: 1.453, z: 72.13}
+  m_LocalPosition: {x: 15, y: -1, z: 95}
   m_LocalScale: {x: 0.02, y: 0.02, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
