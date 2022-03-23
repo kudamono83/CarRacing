@@ -16,17 +16,28 @@ public class Laser : MonoBehaviour
     Vector3 tmp;
     Vector3 dir;
 
+    float x;
+    float y;
+    float z;
+    float x2;
+    float y2;
+    float z2;
+
+    float px;
+    float py;
+    float pz;
+
     // Start is called before the first frame update
     void Start()
     {
         car = GameObject.Find ("Car");
         carMove = car.GetComponent<CarMove>();
 
-        //float x = tmp.x;
-        //float y = tmp.y;
-        //float z = tmp.z;
-        tmp = car.transform.position;
-        dir = car.transform.eulerAngles;
+        //x = tmp.x;
+        //y = tmp.y;
+        //z = tmp.z;
+        //tmp = car.transform.position;
+        //dir = car.transform.eulerAngles;
 
         //this.gameObject.SetActive(false);
 
@@ -43,6 +54,23 @@ public class Laser : MonoBehaviour
     {
         LaserNumber = carMove.ItemNumber;
 
+        tmp = car.transform.position;
+        dir = car.transform.eulerAngles;
+
+        x = tmp.x;
+        y = tmp.y;
+        z = tmp.z;
+        x2 = dir.x;
+        y2 = dir.y;
+        z2 = dir.z;
+
+        Transform myTransform = this.transform;
+        Vector3 pos = myTransform.position;
+
+        px = pos.x;
+        py = pos.y;
+        pz = pos.z;
+
         //Debug.Log ("AaAaAaAaAa");
         //Debug.Log (LaserNumber);
 
@@ -58,8 +86,9 @@ public class Laser : MonoBehaviour
 
             Debug.Log ("dekitemasu");
             mesh.material.color = mesh.material.color + new Color32(0,0,0,255);
-            //transform.position = new Vector3 (x,y,z)
-            transform.position = tmp;
+            //transform.position = new Vector3 ( px+=10.925f , py-=28.665f , pz+=108.5f );
+            //transform.Rotate(x2 + 90,z2 - 1,-y2);
+            //transform.position = tmp;
             //this.gameObject.SetActive(true);
             //レーザーを動かすスクリプト
         }
