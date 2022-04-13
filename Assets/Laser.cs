@@ -5,7 +5,8 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
 
-    private GameObject car;
+    public GameObject car;
+    public GameObject Me;
     int LaserNumber;
     CarMove carMove;
 
@@ -30,7 +31,7 @@ public class Laser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        car = GameObject.Find ("Car");
+        //car = GameObject.Find ("Car");
         carMove = car.GetComponent<CarMove>();
 
         //x = tmp.x;
@@ -41,7 +42,7 @@ public class Laser : MonoBehaviour
 
         //this.gameObject.SetActive(false);
 
-        transform.position = new Vector3(15,-1,95);
+        //transform.position = new Vector3(0,0,0);
 
         mesh = GetComponent<MeshRenderer>();
         mesh.material.color = mesh.material.color - new Color32(0,0,0,255);
@@ -77,6 +78,11 @@ public class Laser : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.I)) && (LaserNumber == 4))
         {
             HowManyTimes2 += 1;
+
+            GameObject cloneLaser = Instantiate(Me, transform.position, Quaternion.identity);
+            
+            //GameObject cloneObject = Instantiate(cloneLaser,Quaternion.identity);
+            //cloneObject.transform.Translate(0,0,-1);
 
             if (HowManyTimes2 == 3)
             {
