@@ -232,6 +232,12 @@ public class CarMove : MonoBehaviour
             myTransform.eulerAngles = worldAngle;
         }
 
+        if (Input.GetKey(KeyCode.M))
+        {
+            transform.position = new Vector3(14,2,70);
+        }
+
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             //if (ItemNumber == 0)
@@ -1005,7 +1011,7 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：Item4個目途中から。レーザーを動かすスクリプト。(クローンを作る　→　(位置大きさ調整)　→　色変更　→　最終的に消えるまで)
+//次回やること：Item4個目途中から。レーザーを動かすスクリプト。(一部透明のままだから、色変更をどうにかする　→　動かす　→　最終的に消えるまで)
 //レーザーの当たり判定は敵などを作ってから。
 
 //リスポーン時間、作ってもいいかも。一定時間orキー連打でリスポーン早くなるとか

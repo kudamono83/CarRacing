@@ -56,7 +56,7 @@ public class Laser : MonoBehaviour
         LaserNumber = carMove.ItemNumber;
 
         tmp = car.transform.position;
-        dir = car.transform.eulerAngles;
+        dir = Me.transform.eulerAngles;
 
         x = tmp.x;
         y = tmp.y;
@@ -80,18 +80,21 @@ public class Laser : MonoBehaviour
             HowManyTimes2 += 1;
 
             GameObject cloneLaser = Instantiate(Me, transform.position, Quaternion.identity);
-            
+            cloneLaser.transform.localScale = new Vector3(0.02f,0.02f,3);
+            cloneLaser.transform.Rotate(x2,y2,z2);
+            //cloneLaser.transform.Rotate(y2,z2,x2);
+
             //GameObject cloneObject = Instantiate(cloneLaser,Quaternion.identity);
             //cloneObject.transform.Translate(0,0,-1);
+
+            Debug.Log ("dekitemasu");
+            mesh.material.color = mesh.material.color + new Color32(0,0,0,255);
 
             if (HowManyTimes2 == 3)
             {
                 carMove.ItemNumber = 0;
                 HowManyTimes2 = 0;
             }
-
-            Debug.Log ("dekitemasu");
-            mesh.material.color = mesh.material.color + new Color32(0,0,0,255);
             //transform.position = new Vector3 ( px+=10.925f , py-=28.665f , pz+=108.5f );
             //transform.Rotate(x2 + 90,z2 - 1,-y2);
             //transform.position = tmp;
