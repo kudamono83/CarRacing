@@ -79,9 +79,10 @@ public class Laser : MonoBehaviour
         {
             HowManyTimes2 += 1;
 
-            GameObject cloneLaser = Instantiate(Me, transform.position, Quaternion.identity);
-            cloneLaser.transform.localScale = new Vector3(0.02f,0.02f,3);
-            cloneLaser.transform.Rotate(x2,y2,z2);
+            //GameObject cloneLaser = Instantiate(Me, transform.position, Quaternion.identity);
+            //cloneLaser.transform.localScale = new Vector3(0.02f,0.02f,3);
+            //cloneLaser.transform.Rotate(x2,y2,z2);
+
             //cloneLaser.transform.Rotate(y2,z2,x2);
 
             //GameObject cloneObject = Instantiate(cloneLaser,Quaternion.identity);
