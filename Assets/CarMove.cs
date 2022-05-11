@@ -1011,10 +1011,12 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：Item4個目途中から。レーザーを動かすスクリプト。
-//・クローンの向きがおかしい。・public gameobject carができない。etc.
+//次回やること：下記問題から or Item5個目から。
+//・数発に一発の変な向きのレーザー問題
 //参考URL：https://wdkids.sakura.ne.jp/ex/?p=7949
 //　　　　　(Prefab作るあたりから参考)
+//照らし合わせ：Gun = Car、Muzzle = Launcher、Bullet = Laser
+
 //レーザーの当たり判定は敵などを作ってから。
 
 //リスポーン時間、作ってもいいかも。一定時間orキー連打でリスポーン早くなるとか

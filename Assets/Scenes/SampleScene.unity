@@ -9994,6 +9994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b950086933543e5afff9b46ce4d316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  car: {fileID: 894126148}
   Laser: {fileID: 2614193622258992260, guid: 900e202ed2e1b4dafbd83b334c49ff6a, type: 3}
 --- !u!1 &1378659513
 GameObject:
