@@ -166,7 +166,28 @@ public class CarMove : MonoBehaviour
             }
             else
             {
-                kph = Mathf.RoundToInt(300 * (speed + backSpeed));
+                if (UseItem == 11)
+                {
+                    kph = Mathf.RoundToInt(750 * (speed + backSpeed));
+                }
+                else
+                {
+                    if (UseItem == 12)
+                    {
+                        if (Input.GetKey(KeyCode.DownArrow) && speed == 0) 
+                        {
+                            kph = Mathf.RoundToInt(900 * backSpeed);
+                        }
+                        else
+                        {
+                            kph = Mathf.RoundToInt((900 * speed) + (300 * backSpeed));
+                        }
+                    }
+                    else
+                    {
+                        kph = Mathf.RoundToInt(300 * (speed + backSpeed));
+                    }
+                }
             }
         }
 
@@ -316,7 +337,21 @@ public class CarMove : MonoBehaviour
                         }
                         else
                         {
-                            speed += ACCELERATION;
+                            if (UseItem == 11)
+                            {
+                                speed += (ACCELERATION * 2.5f);
+                            }
+                            else
+                            {
+                                if (UseItem == 12)
+                                {
+                                    speed += (ACCELERATION * 3.0f);
+                                }
+                                else
+                                {
+                                    speed += ACCELERATION;
+                                }
+                            }
                         }
                     }
                 }
@@ -336,7 +371,14 @@ public class CarMove : MonoBehaviour
                             }
                             else
                             {
-                                speed += DECELERATION2;
+                                if (UseItem == 11)
+                                {
+                                    speed += (DECELERATION2 * 2.5f);
+                                }
+                                else
+                                {
+                                    speed += DECELERATION2;
+                                }
                             }
                         }
                     }   
@@ -362,7 +404,14 @@ public class CarMove : MonoBehaviour
                             }
                             else
                             {
-                                speed += DECELERATION;
+                                if (UseItem == 11)
+                                {
+                                    speed += (DECELERATION * 2.5f);
+                                }
+                                else
+                                {
+                                    speed += DECELERATION;
+                                }
                             }
                         }
                     }
@@ -382,8 +431,15 @@ public class CarMove : MonoBehaviour
                             }
                             else
                             {
-                                backSpeed -= BACKDECELERATION;
-                            }   
+                                if (UseItem == 11)
+                                {
+                                    backSpeed -= (BACKDECELERATION * 1.5f);
+                                }
+                                else
+                                {
+                                    backSpeed -= BACKDECELERATION;
+                                }   
+                            }
                         }
                     }
                 }
@@ -437,7 +493,21 @@ public class CarMove : MonoBehaviour
                     }
                     else
                     {
-                        backSpeed -= BACKACCELERATION;
+                        if (UseItem == 11)
+                        {
+                            backSpeed -= (BACKACCELERATION * 2.5f);
+                        }
+                        else
+                        {
+                            if (UseItem == 2)
+                            {
+                                backSpeed -= (BACKACCELERATION * 3.0f);
+                            }
+                            else
+                            {
+                                backSpeed -= BACKACCELERATION;
+                            }
+                        }
                     }
                 }
             }
@@ -457,7 +527,14 @@ public class CarMove : MonoBehaviour
                         }
                         else
                         {
-                            backSpeed -= BACKDECELERATION2;
+                            if (UseItem == 11)
+                            {
+                                backSpeed -= (BACKDECELERATION2 * 2.5f);
+                            }   
+                            else
+                            {
+                                backSpeed -= BACKDECELERATION2;
+                            }
                         }
                     }
                 }
@@ -513,8 +590,16 @@ public class CarMove : MonoBehaviour
                     }
                     else
                     {
-                        Quaternion turnRotation = Quaternion.Euler(0f, 0f, ROT_SPEED);
-                        rb.MoveRotation(rb.rotation * turnRotation);
+                        if (UseItem == 11)
+                        {
+                            Quaternion turnRotation = Quaternion.Euler(0f, 0f, (ROT_SPEED * 2.5f));
+                            rb.MoveRotation(rb.rotation * turnRotation);
+                        }
+                        else
+                        {       
+                            Quaternion turnRotation = Quaternion.Euler(0f, 0f, ROT_SPEED);
+                            rb.MoveRotation(rb.rotation * turnRotation);
+                        }
                     }
                 }
             }
@@ -535,8 +620,16 @@ public class CarMove : MonoBehaviour
                     }
                     else
                     {
-                        Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
-                        rb.MoveRotation(rb.rotation * turnRotation);
+                        if (UseItem == 11)
+                        {
+                            Quaternion turnRotation = Quaternion.Euler(0f, 0f, (-ROT_SPEED * 2.5f));
+                            rb.MoveRotation(rb.rotation * turnRotation);
+                        }
+                        else
+                        {       
+                            Quaternion turnRotation = Quaternion.Euler(0f, 0f, -ROT_SPEED);
+                            rb.MoveRotation(rb.rotation * turnRotation);
+                        }
                     }
                 }
             }
@@ -874,7 +967,7 @@ public class CarMove : MonoBehaviour
 
         if (other.CompareTag("Item2"))
         {
-            rnd = UnityEngine.Random.Range(4, 5);
+            rnd = UnityEngine.Random.Range(1, 8);
 
             if (ItemNumber == 0)
             {
@@ -1007,14 +1100,29 @@ public class CarMove : MonoBehaviour
             UseItem = 0;
             ItemNumber = 0;
         }
+
+        if (UseItem == 11)
+        {
+            yield return new WaitForSeconds(15.0f);
+            UseItem = 0;
+            ItemNumber = 0;
+        }
+
+        if (UseItem == 12)
+        {
+            yield return new WaitForSeconds(10.0f);
+            UseItem = 0;
+            ItemNumber = 0;
+        }
     }
 }
 
 //メモ
-//次回やること：下記問題から or Item5個目から。
+//次回やること：Item14から。
+
 //・数発に一発の変な向きのレーザー問題
-//参考URL：https://wdkids.sakura.ne.jp/ex/?p=7949
-//　　　　　(Prefab作るあたりから参考)
+//参考にしたURL：https://wdkids.sakura.ne.jp/ex/?p=7949
+//　　　　　　　　(Prefab作るあたりから参考)
 //照らし合わせ：Gun = Car、Muzzle = Launcher、Bullet = Laser
 
 //レーザーの当たり判定は敵などを作ってから。
@@ -1031,19 +1139,21 @@ public class CarMove : MonoBehaviour
 //　　　  　　CP2 -81, 31, 95 初期向きから左に90度回転
 //　　  　　　CP3  95, 32, 24 0度
 
+//4は飛ばすところまで、5~7は後回し。13は保留。
+
 //?アイテム
 //1・タイヤ強化：20秒間、通常時より全ての性能が1.5倍。
 //2・加速強化：15秒間、通常時より加速と最高時速が2倍、ブレーキが0.5倍
 //3・ハンドル強化：20秒間、通常時より回転速度が2倍
-//4・レーザー：3回分。ロックオンなし。当たると一定時間動けない。
-//5・ロケット：1回。ロックオンあり。当たると一定時間動けない。
-//6・爆弾：1回分。ロックオンなし。当たると一定時間動けない。自爆あり。20秒間持っていると自爆。地面についた3秒後に爆発。
-//7・鎧：20秒間、攻撃を無効化。一定以上ダメージを食らうと鎧は壊れる。
+//＠4・レーザー：3回分。ロックオンなし。当たると一定時間動けない。
+//＊5・ロケット：1回。ロックオンあり。当たると一定時間動けない。
+//＊6・爆弾：1回分。ロックオンなし。当たると一定時間動けない。自爆あり。20秒間持っていると自爆。地面についた3秒後に爆発。
+//＊7・鎧：20秒間、攻撃を無効化。一定以上ダメージを食らうと鎧は壊れる。
 
 //!アイテム
 //11・タイヤ超強化：15秒間、通常時より全ての性能が2.5倍。
 //12・加速強化：10秒間、通常時より加速と最高時速が3倍
-//13・ハンドル強化：15秒間、通常時より回転速度が2倍
+//＊13・ハンドル強化：15秒間、通常時より回転速度が2倍(3個目と一緒、得ではない気が...。保留アイテム)
 //14・上昇気流：10秒間、空も走行できる。
 //15・呪文：ランダムで選ばれた敵(3体くらい?)が倒される。(一定時間動けない)
 //16・危ない爆弾：1回分。ロックオンなし。当たると一定時間動けない。5秒間持っていると自爆。それ以外は自爆なし。地面についた1秒後に広範囲爆発。
