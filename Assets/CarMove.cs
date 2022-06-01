@@ -17,6 +17,8 @@ public class CarMove : MonoBehaviour
     const float MAX_BACK_SPEED = 0.125f;
     const float ROT_SPEED = 1.0f;
 
+    //const float UPDOWNSPEED = 0.01f;
+
     //const float SPACCELERATION = 0.00225f;
     //const float SPDECELERATION = -0.003f;
     //const float SPMAX_SPEED = 1.5f;
@@ -70,15 +72,19 @@ public class CarMove : MonoBehaviour
     float breakSpeed;
     float backSpeed;
 
+    //float updownspeed;
+
     public int ItemNumber;
     int ItemNumber2;
-    int UseItem;
+    public int UseItem;
     int rnd;
     //bool IPush = false;
     //int kph;
     //float bendSpeed;
     //float reallybackSpeed;
     Vector3 move;
+
+    //Vector3 updown;
 
     Vector3 tmp;
     double y;
@@ -99,6 +105,7 @@ public class CarMove : MonoBehaviour
         UseItem = 0;
         rnd = 0;
         move = Vector3.zero;
+        //updown = Vector3.zero;
         rb = GetComponent<Rigidbody>();
 
         StartCoroutine("ItemTime");
@@ -202,6 +209,7 @@ public class CarMove : MonoBehaviour
         float world_angle_x = worldAngle.x;
         float world_angle_y = worldAngle.y;
         float world_angle_z = worldAngle.z;
+        Vector3 pos = myTransform.position;
         //worldAngle.x = -90.0f; 
         //worldAngle.y = 0.0f;
         //worldAngle.z = -1.0f;
@@ -302,7 +310,7 @@ public class CarMove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.P))
         {
-            ItemNumber = 4;
+            ItemNumber = 14;
         }
 
         tmp = gameObject.GetComponent<Transform>().position;
@@ -634,6 +642,23 @@ public class CarMove : MonoBehaviour
                 }
             }
 
+            if (Input.GetKey(KeyCode.W)) 
+            {
+                //updownspeed += UPDOWNSPEED;
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                //updownspeed -= UPDOWNSPEED;
+                //Debug.Log(updownspeed);
+            }
+
+            if (UseItem == 14)
+            {
+                pos.y += 10.0f;
+            }
+
+
             //if(Input.GetKey(KeyCode.C))
             //{
                 //if(mainCamera.enabled(true))
@@ -689,7 +714,9 @@ public class CarMove : MonoBehaviour
 
             //if (ItemNumber == 0)
             //{
-                move = transform.up * (speed + backSpeed);
+            move = transform.up * (speed + backSpeed);
+            //updown = Vector3.up * updownspeed;
+
            // }
 
             //if (ItemNumber == 1)
@@ -1114,11 +1141,18 @@ public class CarMove : MonoBehaviour
             UseItem = 0;
             ItemNumber = 0;
         }
+
+        if (UseItem == 14)
+        {
+            yield return new WaitForSeconds(10.0f);
+            UseItem = 0;
+            ItemNumber = 0;
+        }
     }
 }
 
 //メモ
-//次回やること：Item14から。
+//次回やること：Item14から。上のステージに飛ばすところから(650行目あたり)
 
 //・数発に一発の変な向きのレーザー問題
 //参考にしたURL：https://wdkids.sakura.ne.jp/ex/?p=7949
