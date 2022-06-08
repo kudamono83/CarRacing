@@ -8,6 +8,9 @@ public class OtherStage : MonoBehaviour
     CarMove carMove;
     int Number;
     Color color;
+
+    //public GameObject Stage2;
+
     //MeshRenderer Color;
 
     // Start is called before the first frame update
@@ -15,6 +18,8 @@ public class OtherStage : MonoBehaviour
     {
         carMove = car.GetComponent<CarMove>();
         color = gameObject.GetComponent<Renderer>().material.color;
+
+        //Stage2.SetActive (false);
         //color.a = 1.0f;
         //gameObject.GetComponent<Renderer>().material.color = color;
         //Color.material.color = Color.material.color + new Color32(0,0,0,127);
@@ -28,12 +33,14 @@ public class OtherStage : MonoBehaviour
         if (Number == 14)
         {
             color.a = 0.5f;
+            //Stage2.SetActive (true);
             gameObject.GetComponent<Renderer>().material.color = color;
         
         }
         else
         {
             color.a = 0.0f;
+            //Stage2.SetActive (false);
             gameObject.GetComponent<Renderer>().material.color = color;
         }
         //else

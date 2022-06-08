@@ -57,6 +57,8 @@ public class CarMove : MonoBehaviour
     public GameObject Item1;
     public GameObject Item2;
 
+    public GameObject Stage2;
+
     //public Camera mainCamera;
     //public Camera subCamera;
 
@@ -139,6 +141,8 @@ public class CarMove : MonoBehaviour
 
         Item1.SetActive(true);
         Item2.SetActive(true);
+
+        Stage2.SetActive (false);
 
         HowManyTimes = 0;
 
@@ -285,6 +289,12 @@ public class CarMove : MonoBehaviour
                 //{
                     //HowManyTimes += 1;
                 //}
+                if (UseItem == 14)
+                {
+                    Stage2.SetActive (true);
+                    pos.y += 11.0f;
+                    transform.position = pos;
+                }
             }
 
             if (UseItem == 4)
@@ -653,10 +663,11 @@ public class CarMove : MonoBehaviour
                 //Debug.Log(updownspeed);
             }
 
-            if (UseItem == 14)
-            {
-                pos.y += 10.0f;
-            }
+            //if (UseItem == 14)
+            //{
+                //pos.y += 10.0f;
+                //transform.position = pos;
+            //}
 
 
             //if(Input.GetKey(KeyCode.C))
@@ -1147,12 +1158,13 @@ public class CarMove : MonoBehaviour
             yield return new WaitForSeconds(10.0f);
             UseItem = 0;
             ItemNumber = 0;
+            Stage2.SetActive (false);
         }
     }
 }
 
 //メモ
-//次回やること：Item14から。上のステージに飛ばすところから(650行目あたり)
+//次回やること：Item14から。ステージが透けちゃう。(650行目あたり)
 
 //・数発に一発の変な向きのレーザー問題
 //参考にしたURL：https://wdkids.sakura.ne.jp/ex/?p=7949
