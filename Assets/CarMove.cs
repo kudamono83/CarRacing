@@ -1164,7 +1164,7 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：Item6・16をやる、「爆弾が車の座標に移動する→爆弾が爆発」がうまくできていないのでそこを
+//次回やること：Item6・16をやる、爆弾が爆発しない問題を解決する。
 //参考URL　　：https://clrmemory.com/programming/unity/make-explosion-obj/
 
 //・数発に一発の変な向きのレーザー問題

@@ -6256,7 +6256,6 @@ GameObject:
   - component: {fileID: 858449595}
   - component: {fileID: 858449594}
   - component: {fileID: 858449593}
-  - component: {fileID: 858449597}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -6329,28 +6328,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858449592}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.33, y: 1.31, z: 85}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7070799, y: 0.006170542, z: 0.006170542, w: 0.7070799}
+  m_LocalPosition: {x: 10.21, y: -3.25, z: 22.6}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 106
+  m_Father: {fileID: 894126151}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &858449597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858449592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 451875803264247e995f943e72bf7483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExploadObj: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 3}
-  ExploadPos: {fileID: 858449592}
-  car: {fileID: 894126148}
 --- !u!1 &860017801
 GameObject:
   m_ObjectHideFlags: 0
@@ -14499,6 +14483,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1140226114}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1231507138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1231507140}
+  - component: {fileID: 1231507139}
+  m_Layer: 0
+  m_Name: BombSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1231507139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231507138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451875803264247e995f943e72bf7483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExploadObj: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 3}
+  ExploadPos: {fileID: 858449592}
+--- !u!4 &1231507140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231507138}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.875203, y: -11.88047, z: 81.7278}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 106
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1242403818
 PrefabInstance:
   m_ObjectHideFlags: 0
