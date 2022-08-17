@@ -8,6 +8,7 @@ TagManager:
   - ReverseRunText
   - Item1
   - Item2
+  - Plane
   layers:
   - Default
   - TransparentFX

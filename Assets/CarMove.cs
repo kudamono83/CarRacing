@@ -1164,7 +1164,7 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：Item6・16をやる、爆弾が爆発しない問題を解決する。
+//次回やること：Item6・16の途中から。爆弾の非表示・表示、投げるなど、、、
 //　　　　　　　https://www.unityprogram.info/entry/Unity-Stady-Program
 //参考URL　　：https://clrmemory.com/programming/unity/make-explosion-obj/
 

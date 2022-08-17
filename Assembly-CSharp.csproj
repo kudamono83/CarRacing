@@ -65,13 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AllTexts.cs" />
-    <Compile Include="Assets\bomb.cs" />
-    <Compile Include="Assets\Bomb2.cs" />
     <Compile Include="Assets\Canvas.cs" />
     <Compile Include="Assets\CarMove.cs" />
     <Compile Include="Assets\CheckPoint1.cs" />
     <Compile Include="Assets\CheckPoint2.cs" />
     <Compile Include="Assets\CheckPoint3.cs" />
+    <Compile Include="Assets\ExplosionScript.cs" />
     <Compile Include="Assets\GoalPass.cs" />
     <Compile Include="Assets\Laser.cs" />
     <Compile Include="Assets\Launcher.cs" />
