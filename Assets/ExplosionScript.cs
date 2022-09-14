@@ -17,8 +17,6 @@ public class ExplosionScript : MonoBehaviour
         carMove = car.GetComponent<CarMove>();
 
         transform.position = new Vector3(0,0,0);
-
-        //sphere.SetActive (false);
     }
 
     // Update is called once per frame
@@ -29,7 +27,11 @@ public class ExplosionScript : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.I)) && (BombNumber == 6))
         {
             transform.position = new Vector3(15.20303f,1.452f,97.06855f);
-            //sphere.SetActive (true);
+            
+        }
+        else
+        {
+            sphere.SetActive (false);
         }
     }
 
@@ -38,6 +40,7 @@ public class ExplosionScript : MonoBehaviour
         if (collision.gameObject.tag == "Plane")
         {
             exploder.enabled = true;
+            sphere.SetActive (false);
         }
     }
 }

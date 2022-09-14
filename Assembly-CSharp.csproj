@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AllTexts.cs" />
+    <Compile Include="Assets\BombManager.cs" />
     <Compile Include="Assets\Canvas.cs" />
     <Compile Include="Assets\CarMove.cs" />
     <Compile Include="Assets\CheckPoint1.cs" />
