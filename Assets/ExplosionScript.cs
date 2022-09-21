@@ -22,17 +22,16 @@ public class ExplosionScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BombNumber = carMove.ItemNumber;
+        //BombNumber = carMove.ItemNumber;
 
-        if ((Input.GetKeyDown(KeyCode.I)) && (BombNumber == 6))
-        {
-            transform.position = new Vector3(15.20303f,1.452f,97.06855f);
-            
-        }
-        else
-        {
-            sphere.SetActive (false);
-        }
+        //if ((Input.GetKeyDown(KeyCode.I)) && (BombNumber == 6))
+        //{
+            //transform.position = new Vector3(15.20303f,1.452f,97.06855f);
+        //}
+        //else
+        //{
+            //sphere.SetActive (false);
+        //}
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -40,7 +39,15 @@ public class ExplosionScript : MonoBehaviour
         if (collision.gameObject.tag == "Plane")
         {
             exploder.enabled = true;
-            sphere.SetActive (false);
+            //yield return new WaitForSeconds(0.5f);
+            StartCoroutine(DelayCoroutine());
+            //sphere.SetActive (false);
         }
+    }
+
+    private IEnumerator DelayCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        sphere.SetActive (false);
     }
 }

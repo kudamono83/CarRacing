@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf71c2708d644a0e8bee91bebcb2654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  car: {fileID: 894126148}
   obj: {fileID: 858449592}
 --- !u!4 &71692243
 Transform:
