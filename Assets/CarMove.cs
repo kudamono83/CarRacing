@@ -320,7 +320,7 @@ public class CarMove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.P))
         {
-            ItemNumber = 6;
+            ItemNumber = 4;
         }
 
         tmp = gameObject.GetComponent<Transform>().position;
@@ -1164,7 +1164,9 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：Item6・16の途中から。爆弾の非表示・表示、投げるなど、、、
+//次回やること：レーザー作り直し
+
+//　　　　　　　Item6・16の途中から。爆弾の非表示・表示、投げるなど、、、
 //　　　　　　　最初非表示→キー押されて表示→地面について爆発・非表示→...っていう流れ。
 //　　　　　　　https://www.unityprogram.info/entry/Unity-Stady-Program
 //参考URL　　：https://clrmemory.com/programming/unity/make-explosion-obj/
