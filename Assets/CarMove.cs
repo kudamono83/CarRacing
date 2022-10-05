@@ -1165,6 +1165,7 @@ public class CarMove : MonoBehaviour
 
 //メモ
 //次回やること：レーザー作り直し
+//参考URL　：https://3dcg-school.pro/unity-object-move-beginner/
 
 //　　　　　　　Item6・16の途中から。爆弾の非表示・表示、投げるなど、、、
 //　　　　　　　最初非表示→キー押されて表示→地面について爆発・非表示→...っていう流れ。
