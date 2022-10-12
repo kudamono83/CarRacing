@@ -9,6 +9,7 @@ TagManager:
   - Item1
   - Item2
   - Plane
+  - test
   layers:
   - Default
   - TransparentFX

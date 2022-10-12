@@ -75,6 +75,7 @@
     <Compile Include="Assets\GoalPass.cs" />
     <Compile Include="Assets\Laser.cs" />
     <Compile Include="Assets\LaserManager.cs" />
+    <Compile Include="Assets\LaserMove.cs" />
     <Compile Include="Assets\Launcher.cs" />
     <Compile Include="Assets\OtherStage.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
