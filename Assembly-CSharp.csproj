@@ -94,6 +94,7 @@
     <Compile Include="Assets\Signal_3_Back_Move.cs" />
     <Compile Include="Assets\Signal_3_Move.cs" />
     <Compile Include="Assets\Signal_Brack_Move.cs" />
+    <Compile Include="Assets\Stage.cs" />
     <Compile Include="Assets\StageFile\CarMoveTest.cs" />
     <Compile Include="Assets\TimeCountManager.cs" />
     <Compile Include="Assets\True Explosions\System\Scripts\effects\exploderComponents\ExploderComponent.cs" />

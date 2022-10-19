@@ -22,7 +22,7 @@ public class LaserMove : MonoBehaviour
         if (collision.gameObject.tag == "test")
         {
             Debug.Log("反応あり");
-            Destroy(this.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 }

@@ -49,4 +49,13 @@ public class OtherStage : MonoBehaviour
             //gameObject.GetComponent<Renderer>().material.color = color;
         //}
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Laser")
+        {
+            Debug.Log("反応あり");
+            Destroy(collision.gameObject);
+        }
+    }
 }

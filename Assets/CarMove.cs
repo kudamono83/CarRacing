@@ -320,7 +320,7 @@ public class CarMove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.P))
         {
-            ItemNumber = 4;
+            ItemNumber = 6;
         }
 
         tmp = gameObject.GetComponent<Transform>().position;
@@ -1164,8 +1164,8 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：レーザー　地面に当たったら消えるスクリプト
-//　　　　　　：その次のアイテムなど
+//次回やること：爆弾を作ろう！
+//　　　　　　：解決できなかった問題　レーザー、地面に当たったら消えるスクリプト
 
 //　　　　　　　Item6・16の途中から。爆弾の非表示・表示、投げるなど、、、
 //　　　　　　　最初非表示→キー押されて表示→地面について爆発・非表示→...っていう流れ。

@@ -10,6 +10,7 @@ TagManager:
   - Item2
   - Plane
   - test
+  - Laser
   layers:
   - Default
   - TransparentFX
