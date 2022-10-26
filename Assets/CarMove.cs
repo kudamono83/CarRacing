@@ -736,7 +736,7 @@ public class CarMove : MonoBehaviour
 
             //}
             //move = transform.up * (speed + backSpeed);
-
+            //Debug.Log(rb.position + move);
             rb.MovePosition(rb.position + move);
 
         }));
@@ -1164,7 +1164,8 @@ public class CarMove : MonoBehaviour
 }
 
 //メモ
-//次回やること：爆弾を作ろう！
+//次回やること：その前に軽量化しよう
+//　　　　　　：爆弾を作ろう！
 //　　　　　　：解決できなかった問題　レーザー、地面に当たったら消えるスクリプト
 
 //　　　　　　　Item6・16の途中から。爆弾の非表示・表示、投げるなど、、、
@@ -1175,7 +1176,6 @@ public class CarMove : MonoBehaviour
 //・数発に一発の変な向きのレーザー問題
 //参考にしたURL：https://wdkids.sakura.ne.jp/ex/?p=7949
 //　　　　　　　　(Prefab作るあたりから参考)
-//照らし合わせ：Gun = Car、Muzzle = Launcher、Bullet = Laser
 
 //レーザーの当たり判定は敵などを作ってから。
 
