@@ -1165,6 +1165,7 @@ public class CarMove : MonoBehaviour
 
 //メモ
 //次回やること：その前に軽量化しよう
+//　　　　　　　https://qiita.com/yoship1639/items/7339a6201b44a24fbdfe　2番から
 //　　　　　　：爆弾を作ろう！
 //　　　　　　：解決できなかった問題　レーザー、地面に当たったら消えるスクリプト
 
