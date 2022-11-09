@@ -24,7 +24,7 @@ public class LaserMove : MonoBehaviour
         if (collision.gameObject.tag == "Plane")
         {
             //Debug.Log(collision.gameObject.name);
-            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }
